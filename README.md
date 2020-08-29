@@ -1,4 +1,4 @@
 # 2020s2
 
 
-[![Coverage Status](https://coveralls.io/repos/github/AxelLopezGarabal/desapp-groupA-backend/badge.svg)](https://coveralls.io/github/AxelLopezGarabal/desapp-groupA-backend)
+[![Coverage Status](https://coveralls.io/repos/github/AppDevelopUNQ/desapp-groupA-backend/badge.svg?branch=master)](https://coveralls.io/github/AppDevelopUNQ/desapp-groupA-backend?branch=master)
