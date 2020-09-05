@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>Space for diagram notes</help_text>
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>145</x>
+      <y>145</y>
+      <w>145</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Proyect
+--
+-id: Long
+-icp: I_Icp
+-nombre: string
+-localidad: Localidad
+-PorcentajeMinimoDeCierre: Double (50% a 100%)
+-NombreDeFantasia: string
+-FechaFin: Date (Formato del date localizable)
+-FechaInicio: Date
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>315</y>
+      <w>160</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Icp::I_icp
+--
+- id: Long
+- Factor: Double (Default $1000 min $0 max $100.000)
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>165</x>
+      <y>315</y>
+      <w>105</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Localidad
+--
+- id: Long
+- nombre: string
+- provincia: string
+- poblacion: integer
+- estadoDeConexion: Double
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>270</y>
+      <w>15</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>285</y>
+      <w>175</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>330.0;60.0;330.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>395</x>
+      <y>240</y>
+      <w>15</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>375</x>
+      <y>230</y>
+      <w>50</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>I_ICP
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>135</y>
+      <w>105</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>SistemaDePuntos
+--
+- id: Long
+- reglas: Reglas
+--
+- darPuntos()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>215</y>
+      <w>105</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Reglas
+--
+- id: Long
+--
+- Abstract canhandle()
+- Abstract aplicar()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>485</x>
+      <y>295</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>PesosInvertidos::Regla
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++ canhandle()
++ aplicar()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>295</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>LocalidadInvertida::Regla
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++ canhandle()
++ aplicar()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>295</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>CantidadDeVecesEnElMes::Regla
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++ canhandle()
++ aplicar()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>270</y>
+      <w>135</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;30.0;250.0;30.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>270</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>280</y>
+      <w>120</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220.0;30.0;220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>645</x>
+      <y>175</y>
+      <w>15</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>575</x>
+      <y>20</y>
+      <w>140</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Wallet
+--
+- id: Long
+- sistemaDePuntos: SistemaDePuntos
+--
++ cuantosPuntosTiene()
++ truequePor()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>395</x>
+      <y>20</y>
+      <w>105</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Usuario
+--
+- id: Long
+- nombre: string
+- apodo: string
+- email: string
+- contraseña: string
+- wallet: Wallet
+- donaciones: Donacion
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>495</x>
+      <y>60</y>
+      <w>90</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>645</x>
+      <y>110</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>150</x>
+      <y>535</y>
+      <w>400</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Service
+--
+bg=white
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>165</x>
+      <y>570</y>
+      <w>70</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Mailer
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>315</x>
+      <y>570</y>
+      <w>70</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>ApiARSAT
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>240</x>
+      <y>570</y>
+      <w>70</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>SINGIN/UP
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>390</x>
+      <y>570</y>
+      <w>70</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Monitor
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>465</x>
+      <y>570</y>
+      <w>70</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Notificador/Logger
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>395</x>
+      <y>140</y>
+      <w>105</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Donacion
+--
+- id: Long
+- monto: Double
+- proyecto: Proyecto</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>110</y>
+      <w>15</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>285</x>
+      <y>165</y>
+      <w>120</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>90</x>
+      <y>110</y>
+      <w>135</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>POR CENTAJE MINIMO DE CIERRE?? 
+POR PLATA? 
+O POR LABURO?
+bg=blue
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
