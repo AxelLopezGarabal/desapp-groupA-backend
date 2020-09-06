@@ -64,4 +64,8 @@ public class User {
     public void setWallet(Wallet newWallet) {
         this.wallet = newWallet;
     }
+
+    public void addDonation(Donation aDonation) {
+        this.donations.add(aDonation);
+    }
 }
