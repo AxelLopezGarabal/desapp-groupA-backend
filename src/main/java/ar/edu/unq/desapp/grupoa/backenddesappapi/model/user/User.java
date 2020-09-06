@@ -41,6 +41,10 @@ public class User {
         return this.donations;
     }
 
+    public Wallet getWallet() {
+        return this.wallet;
+    }
+
     public void setName(String newName) {
         this.name = newName;
     }
@@ -55,5 +59,9 @@ public class User {
 
     public void setPassword(String newPassword) {
         this.password = newPassword;
+    }
+
+    public void setWallet(Wallet newWallet) {
+        this.wallet = newWallet;
     }
 }

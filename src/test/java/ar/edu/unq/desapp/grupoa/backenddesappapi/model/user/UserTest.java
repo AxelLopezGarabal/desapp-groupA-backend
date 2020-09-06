@@ -33,27 +33,27 @@ class UserTest {
     }
 
     @Test
-    public void test_01_when_a_user_receives_the_message_getName_responds_with_its_name(){
+    public void test01WhenAUserReceivesTheMessageGetNameRespondsWithItsName(){
         assertEquals(user.getName(), name);
     }
 
     @Test
-    public void test_02_when_a_user_receives_the_message_getNickname_responds_with_its_nickname(){
+    public void test02WhenAUserReceivesTheMessageGetNicknameRespondsWithItsNickname(){
         assertEquals(user.getNickname(), nickname);
     }
 
     @Test
-    public void test_03_when_a_user_receives_the_message_getEmail_responds_with_its_email(){
+    public void test03WhenAUserReceivesTheMessageGetEmailRespondsWithItsEmail(){
         assertEquals(user.getEmail(), email);
     }
 
     @Test
-    public void test_04_when_a_user_receives_the_message_getPassword_responds_with_its_password(){
+    public void test04WhenAUserReceivesTheMessageGetPasswordRespondsWithItsPassword(){
         assertEquals(user.getPassword(), password);
     }
 
     @Test
-    public void test_05_when_a_user_receives_the_message_setName_it_change_its_name(){
+    public void test05WhenAUserReceivesTheMessageSetNameItChangeItsName(){
         String newName = "Cristian";
         assertNotEquals(user.getName(), newName);
 
@@ -63,7 +63,7 @@ class UserTest {
     }
 
     @Test
-    public void test_06_when_a_user_receives_the_message_getNickname_responds_with_its_nickname(){
+    public void test06WhenAUserReceivesTheMessageSetNicknameChangesItsNickname(){
         String newNickname = "cris";
         assertNotEquals(user.getNickname(), newNickname);
 
@@ -73,7 +73,7 @@ class UserTest {
     }
 
     @Test
-    public void test_07_when_a_user_receives_the_message_getEmail_responds_with_its_email(){
+    public void test07WhenAUserReceivesTheMessageSetEmailChangesItsEmail(){
         String newEmail = "@outlook.es";
         assertNotEquals(user.getEmail(), newEmail);
 
@@ -83,7 +83,7 @@ class UserTest {
     }
 
     @Test
-    public void test_08_when_a_user_receives_the_message_getPassword_responds_with_its_password(){
+    public void test08WhenAUserReceivesTheMessageGetPasswordChangesItsPassword(){
         String newPassword = "password";
         assertNotEquals(user.getPassword(), newPassword);
 
@@ -91,8 +91,25 @@ class UserTest {
 
         assertEquals(user.getPassword(), newPassword);
     }
+
     @Test
-    public void test_09_when_a_user_with_0_donations_receives_the_message_getDonations_responds_with_an_empty_list_(){
+    public void test09WhenAUserWith0DonationsReceivesTheMessageGetDonationsRespondsWithAnEmptyList(){
+        assertEquals(user.getDonations(), donations);
         assertEquals(user.getDonations().size(), 0);
+    }
+
+    @Test
+    public void test010WhenAUserReceivesTheMessageGetWalletRespondsWithItsWallet(){
+        assertEquals(user.getWallet(), wallet);
+    }
+
+    @Test
+    public void test011WhenAUserReceivesTheMessageSetWalletChangesItWallet(){
+        Wallet newWallet = mock(Wallet.class);
+        assertNotEquals(user.getWallet(), newWallet);
+
+        user.setWallet(newWallet);
+
+        assertEquals(user.getWallet(), newWallet);
     }
 }

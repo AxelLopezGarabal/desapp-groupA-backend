@@ -25,27 +25,27 @@ class LocalityTest {
     }
 
     @Test
-    public void test_01_Given_A_Locality_when_ask_for_its_name_responds_with_Quilmes(){
+    public void test01GivenALocalityWhenAskForItsNameRespondsWithQuilmes(){
         assertEquals(locality.getName(), name);
     }
 
     @Test
-    public void test_02_Given_A_Locality_when_ask_for_its_province_responds_with_Buenos_Aires(){
+    public void test02GivenALocalityWhenAskForItsProvinceRespondsWithBuenosAires(){
         assertEquals(locality.getProvince(), province);
     }
 
     @Test
-    public void test_03_Given_A_Locality_when_ask_for_its_population_responds_with_582943(){
+    public void test03GivenALocalityWhenAskForItsPopulationRespondsWith582943(){
         assertEquals(locality.getPopulation(), population);
     }
 
     @Test
-    public void test_04_Given_A_Locality_ask_for_its_stateOfConnection_responds_with_20(){
+    public void test04GivenALocalityAskForItsStateOfConnectionRespondsWith20(){
         assertEquals(locality.getStateOfConnection(), stateOfConnection);
     }
 
     @Test
-    public void test_05_Given_A_Locality_it_receives_the_message_setName_changes_its_name(){
+    public void test05GivenALocalityItReceivesTheMessageSetNameChangesItsName(){
         String otherName = "Berazategui";
         assertNotEquals(locality.getName(), otherName);
 
@@ -55,7 +55,7 @@ class LocalityTest {
     }
 
     @Test
-    public void test_06_Given_A_Locality_it_receives_the_message_setProvince_changes_the_province(){
+    public void test06GivenALocalityItReceivesTheMessageSetProvinceChangesTheProvince(){
         String otherProvince = "Salta";
         assertNotEquals(locality.getName(), otherProvince);
 
@@ -65,7 +65,7 @@ class LocalityTest {
     }
 
     @Test
-    public void test_07_Given_A_Locality_it_receives_the_message_setPopulation_changes_its_Population(){
+    public void test07GivenALocalityItReceivesTheMessageSetPopulationChangesItsPopulation(){
         Integer otherPopulation = 600000;
         assertNotEquals(locality.getName(), otherPopulation);
 
@@ -75,7 +75,7 @@ class LocalityTest {
     }
 
     @Test
-    public void test_08_Given_A_Locality_it_receives_the_message_setStateOfConnection_changes_its_stateOfConnection(){
+    public void test08GivenALocalityItReceivesTheMessageSetStateOfConnectionChangesItsStateOfConnection(){
         Double otherStateOfConnection = 40.0;
         assertNotEquals(locality.getStateOfConnection(), otherStateOfConnection);
 
