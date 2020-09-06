@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IspTest {
 
-    Isp isp;
+    private Isp isp;
     private Long id = 23563L;
     private Double factor = 100000.0;
 
-    Isp defaultIsp;
+    private Isp defaultIsp;
     private Long otherId = 3464L;
 
     @BeforeEach

@@ -9,11 +9,11 @@ import static org.mockito.Mockito.mock;
 
 class DonationTest {
 
-    Donation donation;
-    Long id = 1L;
-    Double amount = 10000.0;
-    String nickname = "caracas";
-    Project project = mock(Project.class);
+    private Donation donation;
+    private Long id = 1L;
+    private Double amount = 10000.0;
+    private String nickname = "caracas";
+    private Project project = mock(Project.class);
 
     @BeforeEach
     void setUp() {

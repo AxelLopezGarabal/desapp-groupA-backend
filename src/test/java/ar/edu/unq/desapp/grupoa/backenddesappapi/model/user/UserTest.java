@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.user;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
