@@ -1,30 +1,28 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.user;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 
 class UserTest {
 
     private User user;
+    private User adminUser;
     private String name = "Pablo";
     private String nickname = "caracas";
     private String email = "@email.com";
     private String password = "";
-    private List<Donation> donations = new ArrayList<>();
     private Wallet wallet = mock(Wallet.class);
 
     @BeforeEach
     void setUp() {
-        user = new User(name, nickname, email, password, donations, wallet);
+        user = new User(name, nickname, email, password, wallet);
+        adminUser = new User(name, nickname, email, password, wallet, true);
     }
 
     @AfterEach
@@ -94,8 +92,7 @@ class UserTest {
 
     @Test
     public void test09WhenAUserWith0DonationsReceivesTheMessageGetDonationsRespondsWithAnEmptyList(){
-        assertEquals(user.getDonations(), donations);
-        assertEquals(user.getDonations().size(), 0);
+        assertTrue(user.getDonations().isEmpty());
     }
 
     @Test
@@ -123,4 +120,39 @@ class UserTest {
         assertEquals(user.getDonations().get(0), aDonation);
     }
 
+    @Test
+    public void test013WhenAUserReceivesTheMessageCreateDonationItCreatesADonationAndAddsItToItsDonations(){
+        Double amount = 10000.0;
+        Project project = mock(Project.class);
+
+        assertTrue(user.getDonations().isEmpty());
+
+        user.createADonation(amount, project);
+
+        Donation createdDonation = user.getDonations().get(0);
+
+        assertEquals(createdDonation.getAmount(), amount);
+        assertEquals(createdDonation.getProject(), project);
+    }
+
+    @Test
+    public void test014WhenAUserThatIsNotAnAdminReceivesTheMessageIsAdminRespondsFalse(){
+        assertFalse(user.isAdmin());
+    }
+
+    @Test
+    public void test015WhenAUserThatIsAnAdminReceivesTheMessageIsAdminRespondsTrue(){
+        assertTrue(adminUser.isAdmin());
+    }
+
+    @Test
+    public void test016WhenAUserThatIsAnAdminReceivesTheMessageCreateProjectItsCreate(){
+        assertTrue(adminUser.isAdmin());
+    }
+
+    @Test
+    public void test017WhenAUserThatIsNotAnAdminReceivesTheMessageBecomeAdminItBecomesAnAdmin(){
+        user.becomeAdmin();
+        assertTrue(user.isAdmin());
+    }
 }
