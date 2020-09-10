@@ -14,6 +14,12 @@ public class Donation {
         this.project = project;
     }
 
+    public Donation(Double amount, String nickname, Project project) {
+        this.amount = amount;
+        this.nickname = nickname;
+        this.project = project;
+    }
+
     public Long getId() {
         return this.id;
     }
@@ -40,5 +46,9 @@ public class Donation {
 
     public void setProject(Project newProject) {
         this.project = newProject;
+    }
+
+    public void sendToProject(Project project) {
+        project.receiveNewDonation(this);
     }
 }
