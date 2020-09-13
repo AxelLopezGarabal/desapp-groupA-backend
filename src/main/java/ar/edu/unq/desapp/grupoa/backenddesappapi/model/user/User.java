@@ -13,7 +13,6 @@ public class User {
     private String password;
     private List<Donation> donations;
     private Wallet wallet;
-    private boolean isAdmin;
 
     public User(String name, String nickname, String email, String password, Wallet wallet) {
         this.name = name;
@@ -22,17 +21,6 @@ public class User {
         this.password = password;
         this.donations = new ArrayList<>();
         this.wallet = wallet;
-        this.isAdmin = false;
-    }
-
-    public User(String name, String nickname, String email, String password, Wallet wallet, boolean isAdmin) {
-        this.name = name;
-        this.nickname = nickname;
-        this.email = email;
-        this.password = password;
-        this.donations = new ArrayList<>();
-        this.wallet = wallet;
-        this.isAdmin = isAdmin;
     }
 
     public String getName() {
@@ -87,13 +75,6 @@ public class User {
         Donation newDonation = new Donation(amount, this.nickname, project);
         this.donations.add(newDonation);
         newDonation.sendToProject(project);
-    }
-
-    public boolean isAdmin() {
-        return this.isAdmin;
-    }
-
-    public void becomeAdmin() {
-        this.isAdmin = true;
+        this.wallet.gainPointsForDonation(newDonation);
     }
 }

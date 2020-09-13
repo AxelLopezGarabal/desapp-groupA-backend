@@ -12,7 +12,6 @@ import static org.mockito.Mockito.mock;
 class UserTest {
 
     private User user;
-    private User adminUser;
     private String name = "Pablo";
     private String nickname = "caracas";
     private String email = "@email.com";
@@ -22,7 +21,6 @@ class UserTest {
     @BeforeEach
     void setUp() {
         user = new User(name, nickname, email, password, wallet);
-        adminUser = new User(name, nickname, email, password, wallet, true);
     }
 
     @AfterEach
@@ -97,6 +95,7 @@ class UserTest {
 
     @Test
     public void test010WhenAUserReceivesTheMessageGetWalletRespondsWithItsWallet(){
+        user.setWallet(wallet);
         assertEquals(user.getWallet(), wallet);
     }
 
@@ -133,26 +132,5 @@ class UserTest {
 
         assertEquals(createdDonation.getAmount(), amount);
         assertEquals(createdDonation.getProject(), project);
-    }
-
-    @Test
-    public void test014WhenAUserThatIsNotAnAdminReceivesTheMessageIsAdminRespondsFalse(){
-        assertFalse(user.isAdmin());
-    }
-
-    @Test
-    public void test015WhenAUserThatIsAnAdminReceivesTheMessageIsAdminRespondsTrue(){
-        assertTrue(adminUser.isAdmin());
-    }
-
-    @Test
-    public void test016WhenAUserThatIsAnAdminReceivesTheMessageCreateProjectItsCreate(){
-        assertTrue(adminUser.isAdmin());
-    }
-
-    @Test
-    public void test017WhenAUserThatIsNotAnAdminReceivesTheMessageBecomeAdminItBecomesAnAdmin(){
-        user.becomeAdmin();
-        assertTrue(user.isAdmin());
     }
 }

@@ -20,7 +20,6 @@ class ProjectTest {
     private Date startDate = new Date();
     private Date deadline = new Date();
     private Double factor = 100000.0;
-    private Double defaultFactor = 1000.0;
     private Locality locality = mock(Locality.class);
 
     @BeforeEach
@@ -67,6 +66,7 @@ class ProjectTest {
 
     @Test
     public void test07WhenADefaultProjectReceivesTheMessageGetFactorRespondsWithItsFactorWhichIs1000(){
+        Double defaultFactor = 1000.0;
         assertEquals(defaultProject.getFactor(), defaultFactor);
     }
 
