@@ -1,4 +1,6 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rule;
 
-public class TimesInTheMonth {
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.interfaces.IRule;
+
+public class TimesInTheMonth implements IRule {
 }

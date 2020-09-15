@@ -1,4 +1,6 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rule;
 
-public class InvertedCash {
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.interfaces.IRule;
+
+public class InvertedCash implements IRule {
 }
