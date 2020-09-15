@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoa.backenddesappapi.model.puntuationsystem;
+package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
 

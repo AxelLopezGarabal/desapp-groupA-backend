@@ -1,9 +1,9 @@
-package ar.edu.unq.desapp.grupoa.backenddesappapi.model.puntuationsystem;
+package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-class PuntuationSystemTest {
+class PunctuationSystemTest {
 
     @BeforeEach
     void setUp() {

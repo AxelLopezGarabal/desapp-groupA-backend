@@ -1,7 +1,7 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.user;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.puntuationsystem.PunctuationSystem;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.PunctuationSystem;
 
 public class Wallet {
     private Double points = 0.0;
