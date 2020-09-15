@@ -2,7 +2,6 @@ package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.interfaces.IRule;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rule.InvertedLocality;
 
 import java.util.List;
 
