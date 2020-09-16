@@ -92,11 +92,11 @@ public class User {
         return this.isDonationOfThisMonth(donation) && this.isDonationOfThisYear(donation);
     }
 
-    boolean isDonationOfThisYear(Donation donation) {
+    public boolean isDonationOfThisYear(Donation donation) {
         return donation.isOfThisYear(LocalDate.now().getYear());
     }
 
-    boolean isDonationOfThisMonth(Donation donation) {
+    public boolean isDonationOfThisMonth(Donation donation) {
         return donation.isOfThisMonth(LocalDate.now().getMonth());
     }
 }
