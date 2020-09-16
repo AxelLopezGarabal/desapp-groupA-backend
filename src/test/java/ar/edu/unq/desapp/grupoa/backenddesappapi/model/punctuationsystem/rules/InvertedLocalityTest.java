@@ -1,8 +1,6 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rules;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Locality;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rule.InvertedLocality;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 import org.junit.jupiter.api.AfterEach;
