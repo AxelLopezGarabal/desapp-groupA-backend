@@ -32,7 +32,7 @@ public class InvertedCashTest {
 
     @Test
     public void test01WhenInvertedForCashReceivesTheMessageIsApplicableWhereTheDonationAmountIsGreaterThen1000RespondsWithTrue(){
-        when(aDonation.getAmount()).thenReturn(1000.1);
+        when(aDonation.amountIsGreaterThen(1000)).thenReturn(true);
         assertTrue(forCash.isApplicable(aDonation, aUser));
     }
 
