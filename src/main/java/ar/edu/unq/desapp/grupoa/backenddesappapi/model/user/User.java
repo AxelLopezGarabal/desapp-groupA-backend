@@ -3,8 +3,10 @@ package ar.edu.unq.desapp.grupoa.backenddesappapi.model.user;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class User {
     private String name;
@@ -74,7 +76,27 @@ public class User {
     public void createADonation(Double amount, Project project) {
         Donation newDonation = new Donation(amount, this.nickname, project);
         this.donations.add(newDonation);
+        this.wallet.gainPointsForDonation(newDonation, this);
         newDonation.sendToProject(project);
-        this.wallet.gainPointsForDonation(newDonation);
+    }
+
+    public Double getPoints() {
+        return this.wallet.getPoints();
+    }
+
+    public List<Donation> getDonationsOfTheMonth() {
+        return this.donations.stream().filter(donation -> this.isOfValidDate(donation)).collect(Collectors.toList());
+    }
+
+    public boolean isOfValidDate(Donation donation) {
+        return this.isDonationOfThisMonth(donation) && this.isDonationOfThisYear(donation);
+    }
+
+    boolean isDonationOfThisYear(Donation donation) {
+        return donation.isOfThisYear(LocalDate.now().getYear());
+    }
+
+    boolean isDonationOfThisMonth(Donation donation) {
+        return donation.isOfThisMonth(LocalDate.now().getMonth());
     }
 }

@@ -5,8 +5,12 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.Month;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 class UserTest {
@@ -120,9 +124,21 @@ class UserTest {
     }
 
     @Test
-    public void test013WhenAUserReceivesTheMessageCreateDonationItCreatesADonationAndAddsItToItsDonations(){
-        Double amount = 10000.0;
+    public void test013WhenAUserReceivesTheMessageGetPointsWhenHeHas0PointsRespondsWith0(){
+        assertEquals(user.getPoints(), 0.0);
+    }
+
+    @Test
+    public void test014WhenAUserReceivesTheMessageGetPointsWhenHeHas100PointsRespondsWith100(){
+        when(wallet.getPoints()).thenReturn(100.0);
+        assertEquals(user.getPoints(), 100.0);
+    }
+
+    @Test
+    public void test015WhenAUserReceivesTheMessageCreateDonationItCreatesADonationAndAddsItToItsDonations(){
+        Double amount = 1000.0;
         Project project = mock(Project.class);
+        when(wallet.getPoints()).thenReturn(1000.0);
 
         assertTrue(user.getDonations().isEmpty());
 
@@ -132,5 +148,88 @@ class UserTest {
 
         assertEquals(createdDonation.getAmount(), amount);
         assertEquals(createdDonation.getProject(), project);
+        assertEquals(user.getPoints(), 1000.0);
+    }
+
+    @Test
+    public void test016WhenAUserReceivesTheMessageGetDonationsOfTheMonthRespondsWithAListOfTheDonationOfThisMonth(){
+        Donation donation = mock(Donation.class);
+        Donation otherDonation = mock(Donation.class);
+        Donation oldDonation = mock(Donation.class);
+
+        when(donation.isOfThisYear(2020)).thenReturn(true);
+        when(otherDonation.isOfThisYear(2020)).thenReturn(true);
+        when(oldDonation.isOfThisYear(2020)).thenReturn(true);
+
+        when(donation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(true);
+        when(otherDonation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(true);
+        when(oldDonation.isOfThisMonth(Month.AUGUST)).thenReturn(false);
+
+        user.addDonation(donation);
+        user.addDonation(otherDonation);
+        user.addDonation(oldDonation);
+
+        assertEquals(user.getDonations().size(), 3);
+        assertEquals(user.getDonationsOfTheMonth().size(), 2);
+        assertEquals(user.getDonationsOfTheMonth().get(0), donation);
+        assertEquals(user.getDonationsOfTheMonth().get(1), otherDonation);
+    }
+
+    @Test
+    public void test017WhenAUserReceivesTheMessageIsOfValidDateAndTheDonationIsFromAValidDateRespondsTrue(){
+        Donation donation = mock(Donation.class);
+
+        when(donation.isOfThisYear(2020)).thenReturn(true);
+
+        when(donation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(true);
+
+        assertTrue(user.isOfValidDate(donation));
+    }
+
+    @Test
+    public void test018WhenAUserReceivesTheMessageIsOfValidDateAndTheDonationIsNotFromAValidDateRespondsFalse(){
+        Donation donation = mock(Donation.class);
+
+        when(donation.isOfThisYear(2020)).thenReturn(false);
+
+        when(donation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(true);
+
+        assertFalse(user.isOfValidDate(donation));
+    }
+
+    @Test
+    public void test019WhenAUserReceivesTheMessageRespondsFalse(){
+        Donation donation = mock(Donation.class);
+
+        when(donation.isOfThisYear(2020)).thenReturn(false);
+
+        assertFalse(user.isDonationOfThisYear(donation));
+    }
+
+    @Test
+    public void test020WhenAUserReceivesTheMessageRespondsTrue(){
+        Donation donation = mock(Donation.class);
+
+        when(donation.isOfThisYear(2020)).thenReturn(true);
+
+        assertTrue(user.isDonationOfThisYear(donation));
+    }
+
+    @Test
+    public void test21WhenAUserReceivesTheMessageRespondsFalse(){
+        Donation donation = mock(Donation.class);
+
+        when(donation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(false);
+
+        assertFalse(user.isDonationOfThisMonth(donation));
+    }
+
+    @Test
+    public void test22WhenAUserReceivesTheMessageRespondsTrue(){
+        Donation donation = mock(Donation.class);
+
+        when(donation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(true);
+
+        assertTrue(user.isDonationOfThisMonth(donation));
     }
 }

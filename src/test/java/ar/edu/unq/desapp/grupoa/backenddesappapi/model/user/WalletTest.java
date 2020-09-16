@@ -70,11 +70,14 @@ public class WalletTest {
     @Test
     public void test06WhenAWalletReceivesTheMessageGainPointsForDonationItGainsAAmountOfPoints(){
         PunctuationSystem punctuationSystem = mock(PunctuationSystem.class);
+
         Donation aDonation = mock(Donation.class);
-        when(punctuationSystem.calculatePointsForDonation(aDonation)).thenReturn(100.0);
+        User user = mock(User.class);
+
+        when(punctuationSystem.pointsGainForDonation(aDonation, user)).thenReturn(100.0);
         wallet.setPunctuationSystem(punctuationSystem);
 
-        wallet.gainPointsForDonation(aDonation);
+        wallet.gainPointsForDonation(aDonation, user);
 
         assertEquals(wallet.getPoints(), 100.0);
     }

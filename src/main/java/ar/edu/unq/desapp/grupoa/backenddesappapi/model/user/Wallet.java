@@ -31,8 +31,8 @@ public class Wallet {
         return this.system;
     }
 
-    public void gainPointsForDonation(Donation aDonation) {
-        Double gainedPoints = this.system.calculatePointsForDonation(aDonation);
+    public void gainPointsForDonation(Donation aDonation, User user) {
+        Double gainedPoints = this.system.pointsGainForDonation(aDonation, user);
         this.addPoints(gainedPoints);
     }
 }

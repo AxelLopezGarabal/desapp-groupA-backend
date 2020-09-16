@@ -5,6 +5,7 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rule.InvertedCash;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rule.InvertedLocality;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem.rule.TimesInTheMonth;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -125,13 +126,15 @@ class PunctuationSystemTest {
         InvertedCash forCash = mock(InvertedCash.class);
         InvertedLocality forLocality = mock(InvertedLocality.class);
 
-        when(forCash.isApplicable(aDonation)).thenReturn(true);
-        when(forLocality.isApplicable(aDonation)).thenReturn(true);
+        User user = mock(User.class);
+
+        when(forCash.isApplicable(aDonation, user)).thenReturn(true);
+        when(forLocality.isApplicable(aDonation, user)).thenReturn(true);
 
         punctuationSystem.addRule(forCash);
         punctuationSystem.addRule(forLocality);
 
-        assertEquals(punctuationSystem.rulesApplicableToDonation(aDonation).size(), 2);
+        assertEquals(punctuationSystem.rulesApplicableToDonation(aDonation, user).size(), 2);
     }
 
     @Test
@@ -139,55 +142,87 @@ class PunctuationSystemTest {
         InvertedCash forCash = mock(InvertedCash.class);
         InvertedLocality forLocality = mock(InvertedLocality.class);
 
-        when(forCash.isApplicable(aDonation)).thenReturn(false);
-        when(forLocality.isApplicable(aDonation)).thenReturn(false);
+        User user = mock(User.class);
+
+        when(forCash.isApplicable(aDonation, user)).thenReturn(false);
+        when(forLocality.isApplicable(aDonation, user)).thenReturn(false);
 
         punctuationSystem.addRule(forCash);
         punctuationSystem.addRule(forLocality);
 
-        assertTrue(punctuationSystem.rulesApplicableToDonation(aDonation).isEmpty());
+        assertTrue(punctuationSystem.rulesApplicableToDonation(aDonation, user).isEmpty());
     }
 
     @Test
     public void test13WhenAPunctuationSystemReceivesTheMessagePointsGainForListOfDonationHisRespondsWithAAmountOfPointsGainedFrom(){
         InvertedCash forCash = mock(InvertedCash.class);
         InvertedLocality forLocality = mock(InvertedLocality.class);
+        User user = mock(User.class);
 
-        when(forCash.pointsForDonation(aDonation)).thenReturn(2000.0);
-        when(forLocality.pointsForDonation(aDonation)).thenReturn(2000.0);
+        when(forCash.pointsForDonation(aDonation, user)).thenReturn(2000.0);
+        when(forLocality.pointsForDonation(aDonation, user)).thenReturn(2000.0);
 
-        when(forCash.isApplicable(aDonation)).thenReturn(true);
-        when(forLocality.isApplicable(aDonation)).thenReturn(true);
+        when(forCash.isApplicable(aDonation, user)).thenReturn(true);
+        when(forLocality.isApplicable(aDonation, user)).thenReturn(true);
 
         punctuationSystem.addRule(forCash);
         punctuationSystem.addRule(forLocality);
 
-        assertEquals(punctuationSystem.pointsGainForDonation(aDonation), 4000.0);
+        assertEquals(punctuationSystem.pointsGainForDonation(aDonation, user), 4000.0);
     }
 
     @Test
-    public void test14WhenAPunctuationSystemReceivesTheMessageamountOfPointsForDonationsHisRespondsIsTheAmountOfPoints(){
+    public void test14WhenAPunctuationSystemReceivesTheMessageAmountOfPointsForDonationsHisRespondsIsTheAmountOfPoints(){
         InvertedCash forCash = mock(InvertedCash.class);
         InvertedLocality forLocality = mock(InvertedLocality.class);
+        User user = mock(User.class);
 
-        when(forCash.pointsForDonation(aDonation)).thenReturn(2000.0);
-        when(forLocality.pointsForDonation(aDonation)).thenReturn(2000.0);
 
-        when(forCash.isApplicable(aDonation)).thenReturn(true);
-        when(forLocality.isApplicable(aDonation)).thenReturn(true);
+        when(forCash.pointsForDonation(aDonation, user)).thenReturn(2000.0);
+        when(forLocality.pointsForDonation(aDonation, user)).thenReturn(2000.0);
 
-        when(forCash.isApplicable(otherDonation)).thenReturn(true);
+        when(forCash.isApplicable(aDonation, user)).thenReturn(true);
+        when(forLocality.isApplicable(aDonation, user)).thenReturn(true);
 
-        when(forCash.pointsForDonation(otherDonation)).thenReturn(1000.0);
+        when(forCash.isApplicable(otherDonation, user)).thenReturn(true);
+
+        when(forCash.pointsForDonation(otherDonation, user)).thenReturn(1000.0);
 
         punctuationSystem.addRule(forCash);
         punctuationSystem.addRule(forLocality);
 
         List <Donation> donations = new ArrayList<>();
+
         donations.add(aDonation);
         donations.add(otherDonation);
 
-        assertEquals(5000.0, punctuationSystem.amountOfPointsForDonations(donations));
+        assertEquals(5000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
     }
 
+    @Test
+    public void test15WhenAPunctuationSystemReceivesTheMessageCalculatePointsForDonationResponds(){
+        InvertedCash forCash = mock(InvertedCash.class);
+        InvertedLocality forLocality = mock(InvertedLocality.class);
+        User user = mock(User.class);
+
+        when(forCash.pointsForDonation(aDonation, user)).thenReturn(2000.0);
+        when(forLocality.pointsForDonation(aDonation, user)).thenReturn(2000.0);
+
+        when(forCash.isApplicable(aDonation, user)).thenReturn(true);
+        when(forLocality.isApplicable(aDonation, user)).thenReturn(true);
+
+        when(forCash.isApplicable(otherDonation, user)).thenReturn(true);
+
+        when(forCash.pointsForDonation(otherDonation, user)).thenReturn(1000.0);
+
+        punctuationSystem.addRule(forCash);
+        punctuationSystem.addRule(forLocality);
+
+        List <Donation> donations = new ArrayList<>();
+
+        donations.add(aDonation);
+        donations.add(otherDonation);
+
+        assertEquals(5000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
+    }
 }
