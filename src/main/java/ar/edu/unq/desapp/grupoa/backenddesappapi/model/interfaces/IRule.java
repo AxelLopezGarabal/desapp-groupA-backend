@@ -7,5 +7,5 @@ public interface IRule {
 
     boolean isApplicable(Donation aDonation, User user);
 
-    Double pointsForDonation(Donation aDonation);
+    Double pointsForDonation(Donation aDonation, User user);
 }

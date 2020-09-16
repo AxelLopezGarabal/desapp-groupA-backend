@@ -7,11 +7,11 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 public class InvertedLocality implements IRule {
     @Override
     public boolean isApplicable(Donation aDonation, User user) {
-        return false;
+        return aDonation.populationOfProjectIsLessThen(2000);
     }
 
     @Override
-    public Double pointsForDonation(Donation aDonation) {
-        return null;
+    public Double pointsForDonation(Donation aDonation, User user) {
+        return aDonation.getAmount() * 2;
     }
 }
