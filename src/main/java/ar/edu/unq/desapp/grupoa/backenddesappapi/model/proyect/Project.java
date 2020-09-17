@@ -98,4 +98,8 @@ public class Project {
     public void setFactor(Double newFactor) {
         this.factor = newFactor;
     }
+
+    public Integer getPopulationOfLocality() {
+        return this.locality.getPopulation();
+    }
 }

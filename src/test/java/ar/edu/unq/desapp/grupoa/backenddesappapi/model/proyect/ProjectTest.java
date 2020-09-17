@@ -181,4 +181,10 @@ class ProjectTest {
 
         assertEquals(project.getFactor(), newFactor);
     }
+
+    @Test
+    public void test20WhenAProjectReceivesTheMessageSetFactorItChangesTheFactor(){
+        when(locality.getPopulation()).thenReturn(1000);
+        assertEquals(project.getPopulationOfLocality(), 1000);
+    }
 }

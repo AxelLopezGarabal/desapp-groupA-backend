@@ -1,10 +1,14 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class Donation {
     private Long id;
     private Double amount;
     private String nickname;
     private Project project;
+    private LocalDate date;
 
 
     public Donation(Long id, Double amount, String nickname, Project project) {
@@ -12,12 +16,14 @@ public class Donation {
         this.amount = amount;
         this.nickname = nickname;
         this.project = project;
+        this.date = LocalDate.now();
     }
 
     public Donation(Double amount, String nickname, Project project) {
         this.amount = amount;
         this.nickname = nickname;
         this.project = project;
+        this.date = LocalDate.now();
     }
 
     public Long getId() {
@@ -50,5 +56,29 @@ public class Donation {
 
     public void sendToProject(Project project) {
         project.receiveNewDonation(this);
+    }
+
+    public boolean amountIsGreaterThen(double amount) {
+        return this.amount > amount;
+    }
+
+    public boolean populationOfProjectIsLessThen(Integer population) {
+        return (this.project.getPopulationOfLocality()) < population;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public void setDate(LocalDate newDate){
+        this.date = newDate;
+    }
+
+    public boolean isOfThisMonth(Month month) {
+        return this.getDate().getMonth() == month;
+    }
+
+    public boolean isOfThisYear(int year) {
+        return this.getDate().getYear() == year;
     }
 }
