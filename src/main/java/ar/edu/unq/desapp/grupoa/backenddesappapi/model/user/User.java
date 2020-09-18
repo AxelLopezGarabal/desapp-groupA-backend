@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class User {
+    private Long userId;
     private String name;
     private String nickname;
     private String email;
@@ -22,6 +23,15 @@ public class User {
         this.email = email;
         this.password = password;
         this.donations = new ArrayList<>();
+        this.wallet = wallet;
+    }
+
+    public User(Long id, String name, String nickname, String email, String password, Wallet wallet) {
+        this.userId = id;
+        this.name = name;
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
         this.wallet = wallet;
     }
 
@@ -98,5 +108,13 @@ public class User {
 
     public boolean isDonationOfThisMonth(Donation donation) {
         return donation.isOfThisMonth(LocalDate.now().getMonth());
+    }
+
+    public Long getId() {
+        return this.userId;
+    }
+
+    public void setId(long l) {
+        this.userId = l;
     }
 }
