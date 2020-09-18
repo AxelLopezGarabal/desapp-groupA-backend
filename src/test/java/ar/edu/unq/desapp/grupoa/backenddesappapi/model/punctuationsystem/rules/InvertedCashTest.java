@@ -43,7 +43,7 @@ public class InvertedCashTest {
     }
 
     @Test
-    public void test03(){
+    public void test03WhenInvertedForCashReceivesTheMessagePointsForDonationRespondsWithTheAmountOfPointsGained(){
         when(aDonation.getAmount()).thenReturn(1000.1);
         assertEquals(forCash.pointsForDonation(aDonation, aUser), 1000.1);
     }

@@ -47,7 +47,7 @@ public class InvertedLocalityTest {
     }
 
     @Test
-    public void test03(){
+    public void test03WhenInvertedForCashReceivesTheMessagePointsForDonationRespondsWithTheAmountOfPointsGained(){
         when(aDonation.getAmount()).thenReturn(1000.0);
         when(aDonation.populationOfProjectIsLessThen(2000)).thenReturn(false);
 

@@ -36,7 +36,7 @@ public class TimesInTheMonthTest {
     }
 
     @Test
-    public void test01WhenInvertedForTheMessageIsApplicableWhereTheRespondsWithTrue(){
+    public void test01WhenInvertedForTheMessageReceivesIsApplicableWhereTheRespondsWithTrue(){
         List<Donation> donations = new ArrayList<>();
         Donation oldDonation = mock(Donation.class);
 
@@ -49,7 +49,7 @@ public class TimesInTheMonthTest {
     }
 
     @Test
-    public void test02WhenInvertedForTheMessageIsApplicableWhereTheRespondsWithTrue(){
+    public void test02WhenInvertedForTheMessageReceivesIsApplicableWhereTheRespondsWithTrue(){
         List<Donation> donations = new ArrayList<>();
 
         when(aDonation.populationOfProjectIsLessThen(2000)).thenReturn(true);
@@ -63,7 +63,7 @@ public class TimesInTheMonthTest {
     }
 
     @Test
-    public void test03(){
+    public void test03PointsWhenInvertedForReceivesTheMessageForDonationRespondsWithTheAmountOfPointsGained(){
         List<Donation> donations = new ArrayList<>();
         Donation oldDonation = mock(Donation.class);
 
