@@ -9,10 +9,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PunctuationSystem {
+    private Long id;
     private List<Product> products;
     private List<IRule> rules;
 
     public PunctuationSystem(List<IRule> listOfRules, List<Product> productList) {
+        this.rules = listOfRules;
+        this.products = productList;
+    }
+
+    public PunctuationSystem(Long id, List<IRule> listOfRules, List<Product> productList) {
+        this.id = id;
         this.rules = listOfRules;
         this.products = productList;
     }
@@ -64,5 +71,13 @@ public class PunctuationSystem {
 
     public Double amountOfPointsForDonations(List<Donation> donations, User user) {
         return donations.stream().mapToDouble(donation -> this.pointsGainForDonation(donation, user)).sum();
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(long l) {
+        this.id = l;
     }
 }
