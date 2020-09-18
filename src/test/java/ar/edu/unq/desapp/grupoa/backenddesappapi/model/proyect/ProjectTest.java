@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -17,8 +17,8 @@ class ProjectTest {
     private Long id = 10L;
     private Double minimumClosingPercentage = 60.0;
     private String fantasyName = "Florencio Varela connection";
-    private Date startDate = new Date();
-    private Date deadline = new Date();
+    private LocalDate startDate = LocalDate.now();
+    private LocalDate deadline = LocalDate.now();
     private Double factor = 100000.0;
     private Locality locality = mock(Locality.class);
 
@@ -68,11 +68,6 @@ class ProjectTest {
     public void test07WhenADefaultProjectReceivesTheMessageGetFactorRespondsWithItsFactorWhichIs1000(){
         Double defaultFactor = 1000.0;
         assertEquals(defaultProject.getFactor(), defaultFactor);
-    }
-
-    @Test
-    public void test08WhenAProjectReceivesTheMessageGetDeadlineRespondsWithItsDeadline(){
-        assertEquals(project.getDeadline(), deadline);
     }
 
     @Test
@@ -157,7 +152,7 @@ class ProjectTest {
 
     @Test
     public void test17WhenAProjectReceivesTheMessageSetDeadlineItChangesTheDeadline(){
-        Date newDeadline = new Date();
+        LocalDate newDeadline = LocalDate.now();
 
         project.setDeadline(newDeadline);
 

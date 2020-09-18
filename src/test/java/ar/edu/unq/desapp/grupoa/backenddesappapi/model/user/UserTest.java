@@ -16,6 +16,8 @@ import static org.mockito.Mockito.when;
 class UserTest {
 
     private User user;
+    private User otherUser;
+    private Long id = 1L;
     private String name = "Pablo";
     private String nickname = "caracas";
     private String email = "@email.com";
@@ -25,6 +27,7 @@ class UserTest {
     @BeforeEach
     void setUp() {
         user = new User(name, nickname, email, password, wallet);
+        otherUser = new User(id, name, nickname, email, password, wallet);
     }
 
     @AfterEach
@@ -198,7 +201,7 @@ class UserTest {
     }
 
     @Test
-    public void test019WhenAUserReceivesTheMessageRespondsFalse(){
+    public void test019WhenAUserReceivesTheMessageIsDonationOfThisYearRespondsFalseWhenTheDonationIsNotFromThisYear(){
         Donation donation = mock(Donation.class);
 
         when(donation.isOfThisYear(2020)).thenReturn(false);
@@ -207,7 +210,7 @@ class UserTest {
     }
 
     @Test
-    public void test020WhenAUserReceivesTheMessageRespondsTrue(){
+    public void test020WhenAUserReceivesTheMessageIsDonationOfThisYearRespondsTrueWhenTheDonationIsFromThisYear(){
         Donation donation = mock(Donation.class);
 
         when(donation.isOfThisYear(2020)).thenReturn(true);
@@ -216,7 +219,7 @@ class UserTest {
     }
 
     @Test
-    public void test21WhenAUserReceivesTheMessageRespondsFalse(){
+    public void test21WhenAUserReceivesTheMessageIsDonationOfThisMonthRespondsFalseWhenTheDonationIsNotFromThisMonth(){
         Donation donation = mock(Donation.class);
 
         when(donation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(false);
@@ -225,11 +228,23 @@ class UserTest {
     }
 
     @Test
-    public void test22WhenAUserReceivesTheMessageRespondsTrue(){
+    public void test22WhenAUserReceivesTheMessageIsDonationOfThisMonthRespondsTrueWhenTheDonationIsFromThisMonth(){
         Donation donation = mock(Donation.class);
 
         when(donation.isOfThisMonth(Month.SEPTEMBER)).thenReturn(true);
 
         assertTrue(user.isDonationOfThisMonth(donation));
+    }
+
+    @Test
+    public void test23WhenAUserReceivesTheMessageGetIdRespondsWithItsId(){
+        assertEquals(otherUser.getId(), id);
+    }
+
+    @Test
+    public void test23WhenAUserReceivesTheMessageSetIdItChangesHisId(){
+        otherUser.setId(2L);
+        assertNotEquals(otherUser.getId(), id);
+        assertEquals(otherUser.getId(), 2L);
     }
 }

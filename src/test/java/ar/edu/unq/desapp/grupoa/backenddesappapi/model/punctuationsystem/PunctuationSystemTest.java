@@ -21,6 +21,10 @@ import static org.mockito.Mockito.when;
 class PunctuationSystemTest {
 
     private PunctuationSystem punctuationSystem;
+    private PunctuationSystem otherPunctuationSystem;
+
+    private Long id = 1L;
+
     private List<IRule> listOfRules = new ArrayList<>();
     private List<Product> productList = new ArrayList<>();
 
@@ -30,6 +34,7 @@ class PunctuationSystemTest {
     @BeforeEach
     void setUp() {
         punctuationSystem = new PunctuationSystem(listOfRules, productList);
+        otherPunctuationSystem = new PunctuationSystem(id, listOfRules, productList);
     }
 
     @AfterEach
@@ -224,5 +229,16 @@ class PunctuationSystemTest {
         donations.add(otherDonation);
 
         assertEquals(5000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
+    }
+
+    @Test
+    public void test16WhenAPunctuationSystemReceivesTheMessageGetIdRespondsWithItsId(){
+        assertEquals(otherPunctuationSystem.getId(), id);
+    }
+
+    @Test
+    public void test17WhenAPunctuationSystemReceivesTheMessageGetIdRespondsWithItsId(){
+        otherPunctuationSystem.setId(2L);
+        assertEquals(otherPunctuationSystem.getId(), 2L);
     }
 }

@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class LocalityTest {
 
     private Locality locality;
+    private Locality otherLocality;
+
+    private Long id = 1L;
     private String name = "Quilmes";
     private String province = "Buenos Aires";
     private Integer population = 582943;
@@ -17,6 +20,7 @@ class LocalityTest {
     @BeforeEach
     void setUp() {
         locality = new Locality(name, province, population, stateOfConnection);
+        otherLocality = new Locality(id, name, province, population, stateOfConnection);
     }
 
     @AfterEach
@@ -82,5 +86,16 @@ class LocalityTest {
         locality.setStateOfConnection(otherStateOfConnection);
 
         assertEquals(locality.getStateOfConnection(), otherStateOfConnection);
+    }
+
+    @Test
+    public void test09GivenALocalityWhenAskForItsIdRespondsWithHisId(){
+        assertEquals(otherLocality.getId(), id);
+    }
+
+    @Test
+    public void test10GivenALocalityWhenReceivesTheMessageSetIdHeChangesHisId(){
+        otherLocality.setId(2L);
+        assertEquals(otherLocality.getId(), 2L);
     }
 }

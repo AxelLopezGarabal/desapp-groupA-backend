@@ -1,20 +1,20 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Project {
     private final Long id;
     private Double minimumClosingPercentage;
     private final String fantasyName;
-    private final Date startDate;
-    private Date deadline;
+    private final LocalDate startDate;
+    private LocalDate deadline;
     private Double factor;
     private final Locality locality;
     private List<Donation> donations;
 
-    public Project(Long id, Double minimumClosingPercentage, String fantasyName, Date startDate, Date deadline, Double factor, Locality locality) {
+    public Project(Long id, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Double factor, Locality locality) {
         this.id = id;
         this.minimumClosingPercentage = minimumClosingPercentage;
         this.fantasyName = fantasyName;
@@ -25,7 +25,7 @@ public class Project {
         this.donations = new ArrayList<>();
     }
 
-    public Project(Long id, Double minimumClosingPercentage, String fantasyName, Date startDate, Date deadline, Locality locality) {
+    public Project(Long id, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Locality locality) {
         this.id = id;
         this.minimumClosingPercentage = minimumClosingPercentage;
         this.fantasyName = fantasyName;
@@ -47,11 +47,11 @@ public class Project {
         return this.fantasyName;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return this.startDate;
     }
 
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return this.deadline;
     }
 
@@ -87,7 +87,7 @@ public class Project {
         return Math.abs(this.amountFromDonations()) == Math.abs(this.calculateAmountToAccomplish());
     }
 
-    public void setDeadline(Date newDeadline) {
+    public void setDeadline(LocalDate newDeadline) {
         this.deadline = newDeadline;
     }
 
