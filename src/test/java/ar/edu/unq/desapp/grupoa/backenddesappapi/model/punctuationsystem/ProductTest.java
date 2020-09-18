@@ -9,7 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductTest {
 
     private Product product;
+    private Product otherProduct;
 
+    private Long id = 1L;
     private String name = "Router";
     private Double pointsRequired = 2000.0;
     private String image = "http://";
@@ -18,6 +20,7 @@ public class ProductTest {
     @BeforeEach
     void setUp() {
         product = new Product(name, pointsRequired, image, amountInStock);
+        otherProduct = new Product(id, name, pointsRequired, image, amountInStock);
     }
 
     @AfterEach
@@ -100,5 +103,16 @@ public class ProductTest {
     public void test13WhenAReceivesTheMessageThereIsStockRespondsWithTrueWhenItsEqualThen0(){
         product.setNewAmountInStock(0);
         assertFalse(product.thereIsStock());
+    }
+
+    @Test
+    public void test14WhenAReceivesTheMessageGetIdRespondsWithItsId(){
+        assertEquals(otherProduct.getId(), id);
+    }
+
+    @Test
+    public void test15WhenAReceivesTheMessageThereIsStockRespondsWithTrueWhenItsEqualThen0(){
+        otherProduct.setId(2L);
+        assertEquals(otherProduct.getId(), 2L);
     }
 }

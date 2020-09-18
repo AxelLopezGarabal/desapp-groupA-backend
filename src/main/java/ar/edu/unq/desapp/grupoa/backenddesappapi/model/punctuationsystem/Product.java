@@ -1,12 +1,21 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem;
 
 public class Product {
+    private Long productId;
     private String name;
     private Double pointsNeeded;
     private String image;
     private Integer amountInStock;
 
     public Product(String name, Double pointsRequired, String image, Integer amountInStock) {
+        this.name = name;
+        this.pointsNeeded = pointsRequired;
+        this.image = image;
+        this.amountInStock = amountInStock;
+    }
+
+    public Product(Long id, String name, Double pointsRequired, String image, Integer amountInStock) {
+        this.productId = id;
         this.name = name;
         this.pointsNeeded = pointsRequired;
         this.image = image;
@@ -55,5 +64,13 @@ public class Product {
 
     public void setNewAmountInStock(int amountInStock) {
         this.amountInStock = amountInStock;
+    }
+
+    public Long getId() {
+        return this.productId;
+    }
+
+    public void setId(long l) {
+        this.productId = l;
     }
 }
