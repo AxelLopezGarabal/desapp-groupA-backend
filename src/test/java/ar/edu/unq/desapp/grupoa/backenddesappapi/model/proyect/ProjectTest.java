@@ -118,7 +118,7 @@ class ProjectTest {
     }
 
     @Test
-    public void test14WhenAProjectReceivesTheMessageResponds(){
+    public void test14WhenAProjectReceivesTheMessageCalculateAmountToAccomplishRespondsWithTheAmountNeededToAccomplishTheProject(){
         when(locality.getPopulation()).thenReturn(1);
 
         Double amountToAccomplish = 60000.0;

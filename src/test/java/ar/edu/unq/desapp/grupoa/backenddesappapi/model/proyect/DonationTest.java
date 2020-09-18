@@ -111,6 +111,7 @@ class DonationTest {
 
     @Test
     public void test09WhenADonationReceivesTheMessageGetDateRespondsWithItsDate(){
+        donation.setDate(LocalDate.parse("2020-09-16"));
         assertEquals(donation.getDate().getYear(), 2020);
         assertEquals(donation.getDate().getMonth(), Month.SEPTEMBER);
         assertEquals(donation.getDate().getDayOfMonth(), 16);
@@ -128,21 +129,29 @@ class DonationTest {
 
     @Test
     public void test11WhenADonationReceivesTheMessageIsOfThisMonthRespondsTrue(){
+        LocalDate newDate = LocalDate.parse("2020-09-02");
+        donation.setDate(newDate);
         assertTrue(donation.isOfThisMonth(Month.SEPTEMBER));
     }
 
     @Test
     public void test12WhenADonationReceivesTheMessageIsOfThisMonthRespondsFalse(){
+        LocalDate newDate = LocalDate.parse("2020-09-02");
+        donation.setDate(newDate);
         assertFalse(donation.isOfThisMonth(Month.AUGUST));
     }
 
     @Test
-    public void test13WhenADonationReceivesTheMessageIsOfThisMonthRespondsTrue(){
+    public void test13WhenADonationReceivesTheMessageIsOfThisYearRespondsTrue(){
+        LocalDate newDate = LocalDate.parse("2020-09-02");
+        donation.setDate(newDate);
         assertTrue(donation.isOfThisYear(2020));
     }
 
     @Test
-    public void test14WhenADonationReceivesTheMessageIsOfThisMonthRespondsFalse(){
+    public void test14WhenADonationReceivesTheMessageIsOfThisYearRespondsFalse(){
+        LocalDate newDate = LocalDate.parse("2020-09-02");
+        donation.setDate(newDate);
         assertFalse(donation.isOfThisYear(1999));
     }
 }

@@ -57,47 +57,47 @@ public class ProductTest {
     }
 
     @Test
-    public void test06WhenAReceivesTheMessageRespondsWithIts(){
+    public void test06WhenAReceivesTheMessageSetNameHeChangeHisName(){
         product.setName("newProductName");
         assertEquals(product.getName(), "newProductName");
     }
 
     @Test
-    public void test07WhenAReceivesTheMessageGetPointsRespondsWithIts(){
+    public void test07WhenAReceivesTheMessageSetNewImageHeChangeHisImage(){
         product.setNewImage("otherImage");
         assertEquals(product.getImage(), "otherImage");
     }
 
     @Test
-    public void test08WhenAReceivesTheMessageRespondsWithIts(){
+    public void test08WhenAReceivesTheMessageSetNewAmountInStockHeChangeHisAmountInStock(){
         product.setNewAmountInStock(20);
         assertEquals(product.getAmountInStock(), 20);
     }
 
     @Test
-    public void test09WhenAReceivesTheMessageRespondsWithIts(){
+    public void test09WhenAReceivesTheMessageGetPointsNeededRespondsWithThePointsRequiredToBuyIt(){
         assertEquals(product.getPointsNeeded(), pointsRequired);
     }
 
     @Test
-    public void test10WhenAReceivesTheMessageRespondsWithIts(){
+    public void test10WhenAReceivesTheMessageIncreaseStockHeIncreaseHisStock(){
         product.increaseStock(200);
         assertEquals(product.getAmountInStock(), 210);
     }
 
     @Test
-    public void test11WhenAReceivesTheMessageRespondsWithIts(){
+    public void test11WhenAReceivesTheMessageDecreaseStockStockHeDecreaseHisStock(){
         product.decreaseStock(1);
         assertEquals(product.getAmountInStock(), 9);
     }
 
     @Test
-    public void test12WhenAReceivesTheMessageRespondsWithIts(){
+    public void test12WhenAReceivesTheMessageThereIsStockRespondsWithTrueWhenItsGreaterThen0(){
         assertTrue(product.thereIsStock());
     }
 
     @Test
-    public void test13WhenAReceivesTheMessageRespondsWithIts(){
+    public void test13WhenAReceivesTheMessageThereIsStockRespondsWithTrueWhenItsEqualThen0(){
         product.setNewAmountInStock(0);
         assertFalse(product.thereIsStock());
     }
