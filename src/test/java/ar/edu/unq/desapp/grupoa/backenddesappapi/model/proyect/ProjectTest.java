@@ -14,7 +14,9 @@ class ProjectTest {
 
     private Project project;
     private Project defaultProject;
+
     private Long id = 10L;
+    private String name = "aName";
     private Double minimumClosingPercentage = 60.0;
     private String fantasyName = "Florencio Varela connection";
     private LocalDate startDate = LocalDate.now();
@@ -24,8 +26,8 @@ class ProjectTest {
 
     @BeforeEach
     void setUp() {
-        project = new Project(id, minimumClosingPercentage, fantasyName, startDate, deadline, factor, locality);
-        defaultProject = new Project(id, minimumClosingPercentage,fantasyName, startDate, deadline, locality);
+        project = new Project(id, name, minimumClosingPercentage, fantasyName, startDate, deadline, factor, locality);
+        defaultProject = new Project(id, name, minimumClosingPercentage,fantasyName, startDate, deadline, locality);
     }
 
     @AfterEach
@@ -181,5 +183,16 @@ class ProjectTest {
     public void test20WhenAProjectReceivesTheMessageSetFactorItChangesTheFactor(){
         when(locality.getPopulation()).thenReturn(1000);
         assertEquals(project.getPopulationOfLocality(), 1000);
+    }
+
+    @Test
+    public void test21WhenAProjectReceivesTheMessageGetNameRespondsWithItsName(){
+        assertEquals(project.getName(), name);
+    }
+
+    @Test
+    public void test22WhenAProjectReceivesTheMessageSetNameChangesItName(){
+        project.setName("newName");
+        assertEquals(project.getName(), "newName");
     }
 }

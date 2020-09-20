@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Project {
     private final Long id;
+    private String name;
     private Double minimumClosingPercentage;
     private final String fantasyName;
     private final LocalDate startDate;
@@ -14,8 +15,9 @@ public class Project {
     private final Locality locality;
     private List<Donation> donations;
 
-    public Project(Long id, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Double factor, Locality locality) {
+    public Project(Long id, String name, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Double factor, Locality locality) {
         this.id = id;
+        this.name = name;
         this.minimumClosingPercentage = minimumClosingPercentage;
         this.fantasyName = fantasyName;
         this.startDate = startDate;
@@ -25,8 +27,9 @@ public class Project {
         this.donations = new ArrayList<>();
     }
 
-    public Project(Long id, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Locality locality) {
+    public Project(Long id, String name, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Locality locality) {
         this.id = id;
+        this.name = name;
         this.minimumClosingPercentage = minimumClosingPercentage;
         this.fantasyName = fantasyName;
         this.startDate = startDate;
@@ -101,5 +104,13 @@ public class Project {
 
     public Integer getPopulationOfLocality() {
         return this.locality.getPopulation();
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String newName) {
+        this.name = newName;
     }
 }
