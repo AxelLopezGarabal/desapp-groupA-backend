@@ -55,7 +55,7 @@ public class PunctuationSystem {
         this.rules.add(newRule);
     }
 
-    public void deleteRule(TimesInTheMonth newRule) {
+    public void deleteRule(IRule newRule) {
         this.rules.remove(newRule);
     }
 

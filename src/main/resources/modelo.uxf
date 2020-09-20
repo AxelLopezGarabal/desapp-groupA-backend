@@ -1,423 +1,161 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
-  <help_text>Space for diagram notes</help_text>
-  <zoom_level>5</zoom_level>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>145</x>
-      <y>145</y>
-      <w>145</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>Proyect
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>20</x><y>0</y><w>310</w><h>470</h></coordinates><panel_attributes>Proyect
 --
--id: Long
--icp: I_Icp
--nombre: string
--localidad: Localidad
--PorcentajeMinimoDeCierre: Double (50% a 100%)
--NombreDeFantasia: string
--FechaFin: Date (Formato del date localizable)
--FechaInicio: Date
+Long id: Long
+name: String
+minimumClosingPercentage: Double
+fantasyName: String
+startDate: LocalDate
+deadline: LocalDate
+factor: Double
+locality: Locality
+donations: List&lt;Donation&gt;
 --
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>300</x>
-      <y>315</y>
-      <w>160</w>
-      <h>95</h>
-    </coordinates>
-    <panel_attributes>Icp::I_icp
++ getId(): Long 
++ getMinimumPercentage(): Double 
++ getFantasyName(): String 
++ getStartDate(): LocalDate 
++ getDeadline(): LocalDate
++ getFactor(): Double
++ getLocality(): Locality
++ calculateTotalAmount(): Double
++ receiveNewDonation(Donation donation): void
++ getDonations(): List&lt;Donation&gt;
++ amountFromDonations(): Double 
++ calculateAmountToAccomplish(): Double 
++ isCoverTheMinimumPercentage(): boolean 
++ setDeadline(LocalDate newDeadline): void 
++ setMinimumPercentage(Double 
++ newMinimumPercentage): void 
++ setFactor(Double newFactor): void 
++ getPopulationOfLocality(): Integer 
++ getName(): String
++ setName(String newName): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>550</y><w>350</w><h>250</h></coordinates><panel_attributes>Localidad
 --
 - id: Long
-- Factor: Double (Default $1000 min $0 max $100.000)
+- name: string
+- province: string
+- population: integer
+- stateOfConnection: Double
 --
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>165</x>
-      <y>315</y>
-      <w>105</w>
-      <h>95</h>
-    </coordinates>
-    <panel_attributes>Localidad
---
-- id: Long
-- nombre: string
-- provincia: string
-- poblacion: integer
-- estadoDeConexion: Double
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>210</x>
-      <y>270</y>
-      <w>15</w>
-      <h>55</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>210</x>
-      <y>285</y>
-      <w>175</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>330.0;60.0;330.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>395</x>
-      <y>240</y>
-      <w>15</w>
-      <h>85</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>375</x>
-      <y>230</y>
-      <w>50</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>I_ICP
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>600</x>
-      <y>135</y>
-      <w>105</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>SistemaDePuntos
++ getName(): String
++ getProvince(): String
++ getPopulation(): Integer
++ getStateOfConnection(): Double
++ setName(String newName): void
++ setPopulation(Integer newPopulation): void
++ setStateOfConnection(Double newStateOfConnection): void
++ getId(): Long
++ setId(long l): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>460</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>990</x><y>290</y><w>440</w><h>280</h></coordinates><panel_attributes>SistemaDePuntos
 --
 - id: Long
-- reglas: Reglas
+- rules: Rules
+- products: Product
 --
-- darPuntos()
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>600</x>
-      <y>215</y>
-      <w>105</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Reglas
++ addProduct(Product newProduct): void
++ deleteProduct(Product newProduct): void
++ getProducts(): List&lt;Product&gt;
++ setProductList(List&lt;Product&gt; newListOfProduct): void 
++ getRules(): List&lt;IRule&gt;
++ setRules(List&lt;IRule&gt; newListOfRules) : void
++ addRule(IRule newRule): void
++ deleteRule(IRule newRule): void
++ rulesApplicableToDonation(Donation aDonation, User user): List&lt;IRule&gt;
++ pointsGainForDonation(Donation aDonation, User user): Double
++ amountOfPointsForDonations(List&lt;Donation&gt; donations, User user): Double
++ getId(): Long
++ setId(long l): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1030</x><y>670</y><w>350</w><h>120</h></coordinates><panel_attributes>Reglas
 --
 - id: Long
 --
-- Abstract canhandle()
-- Abstract aplicar()
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>485</x>
-      <y>295</y>
-      <w>105</w>
-      <h>55</h>
-    </coordinates>
-    <panel_attributes>PesosInvertidos::Regla
++ isApplicable(Donation aDonation, User user): Boolean
++ pointsForDonation(Donation aDonation, User user): Double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>1010</y><w>340</w><h>110</h></coordinates><panel_attributes>PesosInvertidos::Regla
 --
 -id: Long
 _-ClassAttribute: Long_
 --
-+ canhandle()
-+ aplicar()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>600</x>
-      <y>295</y>
-      <w>105</w>
-      <h>55</h>
-    </coordinates>
-    <panel_attributes>LocalidadInvertida::Regla
++ isApplicable(Donation aDonation, User user): Boolean
++ pointsForDonation(Donation aDonation, User user): Double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1070</x><y>1010</y><w>340</w><h>110</h></coordinates><panel_attributes>LocalidadInvertida::Regla
 --
 -id: Long
 _-ClassAttribute: Long_
 --
-+ canhandle()
-+ aplicar()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>710</x>
-      <y>295</y>
-      <w>105</w>
-      <h>55</h>
-    </coordinates>
-    <panel_attributes>CantidadDeVecesEnElMes::Regla
++ isApplicable(Donation aDonation, User user): Boolean
++ pointsForDonation(Donation aDonation, User user): Double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1420</x><y>1010</y><w>330</w><h>110</h></coordinates><panel_attributes>CantidadDeVecesEnElMes::Regla
 --
 -id: Long
 _-ClassAttribute: Long_
 --
-+ canhandle()
-+ aplicar()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>530</x>
-      <y>270</y>
-      <w>135</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;30.0;250.0;30.0;250.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>650</x>
-      <y>270</y>
-      <w>15</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>650</x>
-      <y>280</y>
-      <w>120</w>
-      <h>25</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>220.0;30.0;220.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>645</x>
-      <y>175</y>
-      <w>15</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>575</x>
-      <y>20</y>
-      <w>140</w>
-      <h>95</h>
-    </coordinates>
-    <panel_attributes>Wallet
++ isApplicable(Donation aDonation, User user): Boolean
++ pointsForDonation(Donation aDonation, User user): Double</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>870</x><y>780</y><w>360</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;230;10;110;340;110;340;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1200</x><y>560</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1200</x><y>780</y><w>420</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>400;230;400;110;10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1200</x><y>780</y><w>30</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1010</x><y>0</y><w>400</w><h>190</h></coordinates><panel_attributes>Wallet
 --
 - id: Long
-- sistemaDePuntos: SistemaDePuntos
+- system: PunctuationSystem
+- points: Double
 --
-+ cuantosPuntosTiene()
-+ truequePor()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>395</x>
-      <y>20</y>
-      <w>105</w>
-      <h>95</h>
-    </coordinates>
-    <panel_attributes>Usuario
++ getPoints(): Double
++ addPoints(Double pointsToAdd): void
++ spendPoints(Double amountOfPoints): void
++ setPoints(Double newAmountOfPoints): void
++ setPunctuationSystem(PunctuationSystem punctuationSystem): void
++ getPunctuationSystem(): PointSystem
++ gainPointsForDonation(Donation aDonation, User user): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>460</x><y>0</y><w>340</w><h>440</h></coordinates><panel_attributes>Usuario
 --
 - id: Long
-- nombre: string
-- apodo: string
+- name: string
+- nickname: string
 - email: string
-- contraseña: string
+- password: string
 - wallet: Wallet
-- donaciones: Donacion
+- donations: Donacion
 --
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>495</x>
-      <y>60</y>
-      <w>90</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>645</x>
-      <y>110</y>
-      <w>15</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>150</x>
-      <y>535</y>
-      <w>400</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>Service
++ getName(): String 
++ getNickname(): String 
++ getEmail(): String 
++ getPassword(): String 
++ getDonations(): List&lt;Donation&gt; 
++ getWallet(): Wallet 
++ setName(String newName): void 
++ setNickname(String newNickname): void 
++ setEmail(String newEmail): void 
++ setPassword(String newPassword): void
++ setWallet(Wallet newWallet): void 
++ addDonation(Donation aDonation): void 
++ createADonation(Double amount, Project project): void 
++ getPoints(): Double
++ getDonationsOfTheMonth(): List&lt;Donation&gt; 
++ isOfValidDate(Donation donation): boolean 
++ isDonationOfThisYear(Donation donation): boolean 
++ isDonationOfThisMonth(Donation donation): boolean 
++ getId(): Long 
++ setId(long l): void </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>790</x><y>80</y><w>240</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>220;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1190</x><y>180</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>40</x><y>1280</y><w>800</w><h>180</h></coordinates><panel_attributes>Service
 --
 bg=white
-layer=-1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>165</x>
-      <y>570</y>
-      <w>70</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>Mailer
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>315</x>
-      <y>570</y>
-      <w>70</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>ApiARSAT
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>240</x>
-      <y>570</y>
-      <w>70</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>SINGIN/UP
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>390</x>
-      <y>570</y>
-      <w>70</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>Monitor
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>465</x>
-      <y>570</y>
-      <w>70</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>Notificador/Logger
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>395</x>
-      <y>140</y>
-      <w>105</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>Donacion
+layer=-1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>70</x><y>1350</y><w>140</w><h>70</h></coordinates><panel_attributes>Mailer
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>370</x><y>1350</y><w>140</w><h>70</h></coordinates><panel_attributes>ApiARSAT
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>220</x><y>1350</y><w>140</w><h>70</h></coordinates><panel_attributes>SINGIN/UP
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>520</x><y>1350</y><w>140</w><h>70</h></coordinates><panel_attributes>Monitor
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>670</x><y>1350</y><w>140</w><h>70</h></coordinates><panel_attributes>Notificador/Logger
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>460</x><y>490</y><w>330</w><h>310</h></coordinates><panel_attributes>Donacion
 --
 - id: Long
-- monto: Double
-- proyecto: Proyecto</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>440</x>
-      <y>110</y>
-      <w>15</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>285</x>
-      <y>165</y>
-      <w>120</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>90</x>
-      <y>110</y>
-      <w>135</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>POR CENTAJE MINIMO DE CIERRE?? 
-POR PLATA? 
-O POR LABURO?
-bg=blue
-layer=1</panel_attributes>
-    <additional_attributes/>
-  </element>
-</diagram>
+- amount: Double
+- project: Project
+- date: LocalDate
+--
++ getId()
++ getAmount()
++ getNickname()
++ getProject() 
++ setAmount(Double newAmount)
++ setNickname(String newNickname)
++ setProject(Project newProject)
++ sendToProject(Project project)
++ amountIsGreaterThen(double amount)
++ populationOfProjectIsLessThen(Integer population)
++ getDate()
++ setDate(LocalDate newDate)
++ isOfThisMonth(Month month)
++ isOfThisYear(int year)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>430</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>170</y><w>160</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;140;10</additional_attributes></element></diagram>
