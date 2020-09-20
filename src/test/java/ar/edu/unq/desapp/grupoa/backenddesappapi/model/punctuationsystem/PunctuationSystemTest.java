@@ -189,10 +189,6 @@ class PunctuationSystemTest {
         when(forCash.isApplicable(aDonation, user)).thenReturn(true);
         when(forLocality.isApplicable(aDonation, user)).thenReturn(true);
 
-        when(forCash.isApplicable(otherDonation, user)).thenReturn(true);
-
-        when(forCash.pointsForDonation(otherDonation, user)).thenReturn(1000.0);
-
         punctuationSystem.addRule(forCash);
         punctuationSystem.addRule(forLocality);
 
@@ -201,11 +197,11 @@ class PunctuationSystemTest {
         donations.add(aDonation);
         donations.add(otherDonation);
 
-        assertEquals(5000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
+        assertEquals(4000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
     }
 
     @Test
-    public void test15WhenAPunctuationSystemReceivesTheMessageCalculatePointsForDonationResponds(){
+    public void test15WhenAPunctuationSystemReceivesTheMessageCalculatePointsForDonationWhenTheDonationOnlyAppliesToInvertedForCashRespondsWithTheAmountOfPoints(){
         InvertedCash forCash = mock(InvertedCash.class);
         InvertedLocality forLocality = mock(InvertedLocality.class);
         User user = mock(User.class);
@@ -214,11 +210,7 @@ class PunctuationSystemTest {
         when(forLocality.pointsForDonation(aDonation, user)).thenReturn(2000.0);
 
         when(forCash.isApplicable(aDonation, user)).thenReturn(true);
-        when(forLocality.isApplicable(aDonation, user)).thenReturn(true);
-
-        when(forCash.isApplicable(otherDonation, user)).thenReturn(true);
-
-        when(forCash.pointsForDonation(otherDonation, user)).thenReturn(1000.0);
+        when(forLocality.isApplicable(aDonation, user)).thenReturn(false);
 
         punctuationSystem.addRule(forCash);
         punctuationSystem.addRule(forLocality);
@@ -228,7 +220,7 @@ class PunctuationSystemTest {
         donations.add(aDonation);
         donations.add(otherDonation);
 
-        assertEquals(5000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
+        assertEquals(2000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
     }
 
     @Test
