@@ -201,35 +201,12 @@ class PunctuationSystemTest {
     }
 
     @Test
-    public void test15WhenAPunctuationSystemReceivesTheMessageCalculatePointsForDonationWhenTheDonationOnlyAppliesToInvertedForCashRespondsWithTheAmountOfPoints(){
-        InvertedCash forCash = mock(InvertedCash.class);
-        InvertedLocality forLocality = mock(InvertedLocality.class);
-        User user = mock(User.class);
-
-        when(forCash.pointsForDonation(aDonation, user)).thenReturn(2000.0);
-        when(forLocality.pointsForDonation(aDonation, user)).thenReturn(2000.0);
-
-        when(forCash.isApplicable(aDonation, user)).thenReturn(true);
-        when(forLocality.isApplicable(aDonation, user)).thenReturn(false);
-
-        punctuationSystem.addRule(forCash);
-        punctuationSystem.addRule(forLocality);
-
-        List <Donation> donations = new ArrayList<>();
-
-        donations.add(aDonation);
-        donations.add(otherDonation);
-
-        assertEquals(2000.0, punctuationSystem.amountOfPointsForDonations(donations, user));
-    }
-
-    @Test
-    public void test16WhenAPunctuationSystemReceivesTheMessageGetIdRespondsWithItsId(){
+    public void test15WhenAPunctuationSystemReceivesTheMessageGetIdRespondsWithItsId(){
         assertEquals(otherPunctuationSystem.getId(), id);
     }
 
     @Test
-    public void test17WhenAPunctuationSystemReceivesTheMessageGetIdRespondsWithItsId(){
+    public void test16WhenAPunctuationSystemReceivesTheMessageGetIdRespondsWithItsId(){
         otherPunctuationSystem.setId(2L);
         assertEquals(otherPunctuationSystem.getId(), 2L);
     }
