@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.user;
 
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.junit.jupiter.api.AfterEach;
@@ -20,12 +21,13 @@ class UserTest {
     private Long id = 1L;
     private String name = "Pablo";
     private String nickname = "caracas";
-    private String email = "@email.com";
+    private String email = "seba@email.com";
+    private String invalidEmail = "@gmail.com";
     private String password = "";
     private Wallet wallet = mock(Wallet.class);
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws MailValidation {
         user = new User(name, nickname, email, password, wallet);
         otherUser = new User(id, name, nickname, email, password, wallet);
     }
@@ -76,8 +78,8 @@ class UserTest {
     }
 
     @Test
-    public void test07WhenAUserReceivesTheMessageSetEmailChangesItsEmail(){
-        String newEmail = "@outlook.es";
+    public void test07WhenAUserReceivesTheMessageSetEmailChangesItsEmail() throws MailValidation {
+        String newEmail = "seba@outlook.es";
         assertNotEquals(user.getEmail(), newEmail);
 
         user.setEmail(newEmail);
@@ -242,9 +244,23 @@ class UserTest {
     }
 
     @Test
-    public void test23WhenAUserReceivesTheMessageSetIdItChangesHisId(){
+    public void test24WhenAUserReceivesTheMessageSetIdItChangesHisId(){
         otherUser.setId(2L);
         assertNotEquals(otherUser.getId(), id);
         assertEquals(otherUser.getId(), 2L);
+    }
+
+    @Test
+    public void test25WhenTheEmailIsNotValidTheUserNoBeChangeYouMail() throws MailValidation {
+        String oldUserMail = user.getEmail();
+
+        assertThrows(MailValidation.class, () ->  user.setEmail("asdfqwezxc"));
+
+        assertEquals(user.getEmail(), oldUserMail);
+    }
+
+    @Test
+    public void test26WhenCreateNewUserYourEmailNeedBeValidFormat() throws MailValidation {
+        assertThrows(MailValidation.class, () -> new User(name, nickname, invalidEmail, password, wallet));
     }
 }

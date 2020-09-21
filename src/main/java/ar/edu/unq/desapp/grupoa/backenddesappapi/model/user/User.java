@@ -1,11 +1,14 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.user;
 
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class User {
@@ -17,7 +20,8 @@ public class User {
     private List<Donation> donations;
     private Wallet wallet;
 
-    public User(String name, String nickname, String email, String password, Wallet wallet) {
+    public User(String name, String nickname, String email, String password, Wallet wallet) throws MailValidation {
+        validateEmail(email);
         this.name = name;
         this.nickname = nickname;
         this.email = email;
@@ -26,7 +30,8 @@ public class User {
         this.wallet = wallet;
     }
 
-    public User(Long id, String name, String nickname, String email, String password, Wallet wallet) {
+    public User(Long id, String name, String nickname, String email, String password, Wallet wallet) throws MailValidation {
+        validateEmail(email);
         this.userId = id;
         this.name = name;
         this.nickname = nickname;
@@ -67,8 +72,19 @@ public class User {
         this.nickname = newNickname;
     }
 
-    public void setEmail(String newEmail) {
+    public void setEmail(String newEmail) throws MailValidation {
+        validateEmail(newEmail);
+
         this.email = newEmail;
+    }
+
+    private void validateEmail(String email) throws MailValidation {
+        Pattern VALID_EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = VALID_EMAIL.matcher(email);
+
+        if(!matcher.find()) {
+            throw new MailValidation();
+        }
     }
 
     public void setPassword(String newPassword) {
