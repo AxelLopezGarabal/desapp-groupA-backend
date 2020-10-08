@@ -1,11 +1,24 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect;
 
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.locality.requestbody.LocalityBodyPost;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Localities")
 public class Locality {
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long localityId;
     private String name;
     private String province;
     private Integer population;
     private Double stateOfConnection;
+
+    public Locality() {
+    }
 
     public Locality(String name, String province, Integer population, Double stateOfConnection) {
         this.name = name;
@@ -56,5 +69,14 @@ public class Locality {
 
     public void setId(long l) {
         this.localityId = l;
+    }
+
+    //TODO:: TEST
+    public Locality setBody(LocalityBodyPost body) {
+        return body.setValues(this);
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

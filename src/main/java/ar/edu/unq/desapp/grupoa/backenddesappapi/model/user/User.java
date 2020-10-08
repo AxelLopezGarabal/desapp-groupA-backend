@@ -1,9 +1,14 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.user;
 
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.requestbody.UserBodyPost;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.requestbody.UserBodyPut;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Donation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +16,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
     private String name;
     private String nickname;
     private String email;
     private String password;
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Donation> donations;
+    @OneToOne
+    @JoinColumn(name = "walletId")
     private Wallet wallet;
 
-    public User(String name, String nickname, String email, String password, Wallet wallet) throws MailValidation {
-        validateEmail(email);
+    public User(){}
+
+    public User(String name, String nickname, String email, String password, Wallet wallet) {
         this.name = name;
         this.nickname = nickname;
         this.email = email;
@@ -132,5 +145,20 @@ public class User {
 
     public void setId(long l) {
         this.userId = l;
+    }
+
+    public void updateUser(UserBodyPut body) throws MailValidation {
+        body.setValues(this);
+    }
+
+    public User setUser(UserBodyPost body) throws MailValidation {
+        return body.setValues(this);
+    }
+
+    public void createDonation(Double amount, Project project) {
+        Donation newDonation = new Donation(amount, this.nickname, project);
+        this.donations.add(newDonation);
+        this.wallet.gainPointsForNewDonation(newDonation, this);
+        newDonation.sendToProject(project);
     }
 }

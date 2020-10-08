@@ -1,11 +1,21 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.punctuationsystem;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Products")
 public class Product {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
     private String name;
     private Double pointsNeeded;
     private String image;
     private Integer amountInStock;
+
+    public Product() {
+    }
 
     public Product(String name, Double pointsRequired, String image, Integer amountInStock) {
         this.name = name;
