@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -70,15 +71,23 @@ public class WalletTest {
     @Test
     public void test06WhenAWalletReceivesTheMessageGainPointsForDonationItGainsAAmountOfPoints(){
         PunctuationSystem punctuationSystem = mock(PunctuationSystem.class);
-
-        Donation aDonation = mock(Donation.class);
+        Donation donation = mock(Donation.class);
         User user = mock(User.class);
 
-        when(punctuationSystem.pointsGainForDonation(aDonation, user)).thenReturn(100.0);
+        when(punctuationSystem.pointsGainForDonationWithRules(donation,user)).thenReturn(2000.0);
+
         wallet.setPunctuationSystem(punctuationSystem);
+        wallet.gainPointsForNewDonation(donation, user);
 
-        wallet.gainPointsForDonation(aDonation, user);
+        assertEquals(wallet.getPoints(), 2000.0);
+    }
 
-        assertEquals(wallet.getPoints(), 100.0);
+    @Test
+    public void test07WhenAWalletReceivesTheMessageIt(){
+        assertNull(wallet.getWalletId());
+
+        wallet.setWalletId(1L);
+
+        assertEquals(1L, wallet.getWalletId());
     }
 }

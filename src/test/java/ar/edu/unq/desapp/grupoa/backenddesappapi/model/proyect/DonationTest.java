@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 class DonationTest {
 
     private Donation donation;
+    private Donation emptyDonation;
     private Long id = 1L;
     private Double amount = 10000.0;
     private String nickname = "caracas";
@@ -22,12 +23,23 @@ class DonationTest {
     @BeforeEach
     void setUp() {
         donation = new Donation(id, amount, nickname, project);
+        emptyDonation = new Donation();
     }
 
     @AfterEach
     void tearDown() {
         donation = null;
     }
+
+    @Test
+    public void test00WhenADonationThatIsEmptyReceivesTheAnyGetterMessageResponseWithNull(){
+        assertNull(emptyDonation.getId());
+        assertNull(emptyDonation.getDate());
+        assertNull(emptyDonation.getAmount());
+        assertNull(emptyDonation.getNickname());
+        assertNull(emptyDonation.getProject());
+    }
+
 
     @Test
     public void test01WhenADonationReceivesTheMessageGetIdRespondsWithItsId(){

@@ -164,11 +164,11 @@ class PunctuationSystemTest {
         InvertedLocality forLocality = mock(InvertedLocality.class);
         User user = mock(User.class);
 
-        when(forCash.pointsForDonation(aDonation, user)).thenReturn(2000.0);
-        when(forLocality.pointsForDonation(aDonation, user)).thenReturn(2000.0);
-
         when(forCash.isApplicable(aDonation, user)).thenReturn(true);
         when(forLocality.isApplicable(aDonation, user)).thenReturn(true);
+
+        when(forCash.pointsForDonation(aDonation, user)).thenReturn(2000.0);
+        when(forLocality.pointsForDonation(aDonation, user)).thenReturn(2000.0);
 
         punctuationSystem.addRule(forCash);
         punctuationSystem.addRule(forLocality);
@@ -209,5 +209,44 @@ class PunctuationSystemTest {
     public void test16WhenAPunctuationSystemReceivesTheMessageGetIdRespondsWithItsId(){
         otherPunctuationSystem.setId(2L);
         assertEquals(otherPunctuationSystem.getId(), 2L);
+    }
+
+    @Test
+    public void test17WhenAPunctuationSystemReceivesTheMessagePointsGainForDonationWithRulesRespondsWith(){
+        User user = mock(User.class);
+
+        when(aDonation.getAmount()).thenReturn(1000.0);
+
+        assertEquals(0.0, punctuationSystem.pointsGainForDonationWithRules(aDonation, user));
+    }
+
+    @Test
+    public void test18WhenAPunctuationSystemReceivesTheMessageRespondsWith(){
+        assertEquals(otherPunctuationSystem.generateRules().size(), 3);
+    }
+
+    @Test
+    public void test19WhenAPunctuationSystemReceivesTheMessageRespondsWith(){
+        User user = mock(User.class);
+        InvertedCash forCash = mock(InvertedCash.class);
+        List<IRule> ls = new ArrayList<>();
+        ls.add(forCash);
+
+        assertTrue(punctuationSystem.rulesApplicableToDonation(aDonation, user, ls).isEmpty());
+
+        when(forCash.isApplicable(aDonation, user)).thenReturn(true);
+
+        assertEquals(punctuationSystem.rulesApplicableToDonation(aDonation, user, ls).size(), 1);
+    }
+
+    @Test
+    public void test20WhenAPunctuationSystemReceivesTheMessageRespondsWith(){
+        User user = mock(User.class);
+        InvertedCash forCash = mock(InvertedCash.class);
+        List<IRule> ls = new ArrayList<>();
+        ls.add(forCash);
+        when(forCash.isApplicable(aDonation, user)).thenReturn(true);
+        when(forCash.pointsForDonation(aDonation, user)).thenReturn(2000.0);
+        assertEquals(punctuationSystem.pointsGainForDonation(aDonation, user, ls), 2000.0);
     }
 }
