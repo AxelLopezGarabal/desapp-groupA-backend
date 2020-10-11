@@ -1,15 +1,22 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Month;
 
+@Entity
 public class Donation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double amount;
     private String nickname;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Project project;
     private LocalDate date;
 
+    public Donation() {
+    }
 
     public Donation(Long id, Double amount, String nickname, Project project) {
         this.id = id;

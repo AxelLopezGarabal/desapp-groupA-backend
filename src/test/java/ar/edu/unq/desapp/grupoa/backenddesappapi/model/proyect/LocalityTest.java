@@ -1,15 +1,18 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect;
 
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.locality.requestbody.LocalityBodyPost;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import static org.mockito.Mockito.mock;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class LocalityTest {
 
     private Locality locality;
     private Locality otherLocality;
+    private Locality emptyLocality;
 
     private Long id = 1L;
     private String name = "Quilmes";
@@ -21,11 +24,21 @@ class LocalityTest {
     void setUp() {
         locality = new Locality(name, province, population, stateOfConnection);
         otherLocality = new Locality(id, name, province, population, stateOfConnection);
+        emptyLocality = new Locality();
     }
 
     @AfterEach
     void tearDown() {
         locality = null;
+    }
+
+    @Test
+    public void test00GivenAEmptyLocalityWhenAskForAnyOfItsGetterRespondsWithNull(){
+        assertNull(emptyLocality.getId());
+        assertNull(emptyLocality.getPopulation());
+        assertNull(emptyLocality.getName());
+        assertNull(emptyLocality.getProvince());
+        assertNull(emptyLocality.getStateOfConnection());
     }
 
     @Test
@@ -97,5 +110,22 @@ class LocalityTest {
     public void test10GivenALocalityWhenReceivesTheMessageSetIdHeChangesHisId(){
         otherLocality.setId(2L);
         assertEquals(otherLocality.getId(), 2L);
+    }
+
+    @Test
+    public void test11GivenALocalityWhenReceivesTheMessageSetProvinceHeChangesHisProvince(){
+        otherLocality.setProvince("");
+        assertEquals(otherLocality.getProvince(), "");
+    }
+
+    @Test
+    public void test12GivenALocalityWhenReceivesTheMessageSetBodyHeChangesHisAttributes(){
+        LocalityBodyPost body = mock(LocalityBodyPost.class);
+        when(body.setValues(otherLocality)).thenReturn(new Locality("", "", 0, 0.0));
+        Locality modLocality = otherLocality.setBody(body);
+        assertEquals(modLocality.getProvince(), "");
+        assertEquals(modLocality.getName(), "");
+        assertEquals(modLocality.getPopulation(), 0);
+        assertEquals(modLocality.getStateOfConnection(), 0.0);
     }
 }

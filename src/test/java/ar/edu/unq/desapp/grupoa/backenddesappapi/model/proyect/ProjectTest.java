@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect;
 
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody.ProjectBodyPost;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody.ProjectBodyPut;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,8 @@ class ProjectTest {
 
     private Project project;
     private Project defaultProject;
+    private Project project2;
+    private Project project3;
 
     private Long id = 10L;
     private String name = "aName";
@@ -28,17 +32,23 @@ class ProjectTest {
     void setUp() {
         project = new Project(id, name, minimumClosingPercentage, fantasyName, startDate, deadline, factor, locality);
         defaultProject = new Project(id, name, minimumClosingPercentage,fantasyName, startDate, deadline, locality);
+        project2 = new Project(name, minimumClosingPercentage, fantasyName, startDate, deadline, factor, locality);
+        project3 = new Project(name, minimumClosingPercentage, fantasyName, startDate, deadline, locality);
     }
 
     @AfterEach
     void tearDown() {
         project = null;
         defaultProject = null;
+        project2 = null;
+        project3 = null;
     }
 
     @Test
     public void test01WhenAProjectReceivesTheMessageGetIdRespondsWithItsId(){
         assertEquals(project.getId(), id);
+        assertNull(project2.getId());
+        assertNull(project3.getId());
     }
 
     @Test
@@ -194,5 +204,42 @@ class ProjectTest {
     public void test22WhenAProjectReceivesTheMessageSetNameChangesItName(){
         project.setName("newName");
         assertEquals(project.getName(), "newName");
+    }
+
+    @Test
+    public void test23WhenAProjectReceivesTheMessageSetLocalityChanges(){
+        Locality locality = mock(Locality.class);
+        project.setLocality(locality);
+        assertEquals(project.getLocality(), locality);
+    }
+
+    @Test
+    public void test24WhenAProjectReceivesTheMessageSetStartDateChanges(){
+        LocalDate date = LocalDate.now();
+        project.setStartDate(date);
+        assertEquals(project.getStartDate(), date);
+    }
+
+    @Test
+    public void test25WhenAProjectReceivesTheMessageSetBodyChangesItName(){
+        ProjectBodyPost body = mock(ProjectBodyPost.class);
+        Locality locality = mock(Locality.class);
+        when(body.setValues(project)).thenReturn(project);
+        Project updatedProject = project.setBody(body, locality);
+        assertEquals(locality, updatedProject.getLocality());
+        assertEquals(project.getName(), updatedProject.getName());
+    }
+
+    @Test
+    public void test26WhenAProjectReceivesTheMessageUpdateProjectChangesItName(){
+        ProjectBodyPut body = mock(ProjectBodyPut.class);
+        project.updateProject(body);
+        assertEquals(project.getName(), name);
+    }
+
+    @Test
+    public void test27WhenAProjectReceivesTheMessageSetNameChangesItName(){
+        project.setFantasyName("");
+        assertEquals(project.getFantasyName(), "");
     }
 }

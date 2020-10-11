@@ -1,19 +1,57 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect;
 
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody.ProjectBodyPost;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody.ProjectBodyPut;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Project {
-    private final Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private Double minimumClosingPercentage;
-    private final String fantasyName;
-    private final LocalDate startDate;
+    private String fantasyName;
+    private LocalDate startDate;
     private LocalDate deadline;
     private Double factor;
-    private final Locality locality;
+    @OneToOne
+    @JoinColumn(name = "localityId")
+    private Locality locality;
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Donation> donations;
+
+    public Project() {
+    }
+
+    public Project(String name, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Double factor, Locality locality) {
+        this.name = name;
+        this.minimumClosingPercentage = minimumClosingPercentage;
+        this.fantasyName = fantasyName;
+        this.startDate = startDate;
+        this.deadline = deadline;
+        this.factor = factor;
+        this.locality = locality;
+        this.donations = new ArrayList<>();
+    }
+
+    public Project(String name, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Locality locality) {
+        this.name = name;
+        this.minimumClosingPercentage = minimumClosingPercentage;
+        this.fantasyName = fantasyName;
+        this.startDate = startDate;
+        this.deadline = deadline;
+        this.factor = 1000.0;
+        this.locality = locality;
+        this.donations = new ArrayList<>();
+    }
 
     public Project(Long id, String name, Double minimumClosingPercentage, String fantasyName, LocalDate startDate, LocalDate deadline, Double factor, Locality locality) {
         this.id = id;
@@ -36,6 +74,7 @@ public class Project {
         this.deadline = deadline;
         this.factor = 1000.0;
         this.locality = locality;
+        this.donations = new ArrayList<>();
     }
 
     public Long getId() {
@@ -112,5 +151,27 @@ public class Project {
 
     public void setName(String newName) {
         this.name = newName;
+    }
+
+    //TODO::testing
+    public void setFantasyName(String fantasyName) {
+        this.fantasyName = fantasyName;
+    }
+
+    public Project setBody(ProjectBodyPost body, Locality locality) {
+        this.setLocality(locality);
+        return body.setValues(this);
+    }
+
+    public void setLocality(Locality locality) {
+        this.locality = locality;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void updateProject(ProjectBodyPut body) {
+        body.setValues(this);
     }
 }

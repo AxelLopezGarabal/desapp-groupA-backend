@@ -10,6 +10,7 @@ public class ProductTest {
 
     private Product product;
     private Product otherProduct;
+    private Product emptyProduct;
 
     private Long id = 1L;
     private String name = "Router";
@@ -21,11 +22,22 @@ public class ProductTest {
     void setUp() {
         product = new Product(name, pointsRequired, image, amountInStock);
         otherProduct = new Product(id, name, pointsRequired, image, amountInStock);
+        emptyProduct = new Product();
     }
 
     @AfterEach
     void tearDown() {
         product = null;
+    }
+
+
+    @Test
+    public void test00WhenAProductThatIsEmptyReceivesAnyGetterMessageRespondsWithNull(){
+        assertNull(emptyProduct.getId());
+        assertNull(emptyProduct.getName());
+        assertNull(emptyProduct.getImage());
+        assertNull(emptyProduct.getAmountInStock());
+        assertNull(emptyProduct.getPointsNeeded());
     }
 
     @Test
