@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.respondsbody.project;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.responsebody.ProjectResponseBodyList;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Locality;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +17,6 @@ public class ProjectResponseBodyListTest {
 
     private ProjectResponseBodyList body;
     private Project project = mock(Project.class);
-    private ProjectResponseBodyList otherBody;
 
     @BeforeEach
     void setUp() {
@@ -47,7 +45,7 @@ public class ProjectResponseBodyListTest {
         when(project.getName()).thenReturn("");
         when(project.getDeadline()).thenReturn(LocalDate.now());
 
-        otherBody = new ProjectResponseBodyList(project);
+        ProjectResponseBodyList otherBody = new ProjectResponseBodyList(project);
 
 
         body.setName("");

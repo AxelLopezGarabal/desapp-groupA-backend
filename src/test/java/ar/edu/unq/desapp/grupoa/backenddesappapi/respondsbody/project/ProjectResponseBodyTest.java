@@ -20,7 +20,6 @@ import static org.mockito.Mockito.when;
 public class ProjectResponseBodyTest {
 
     private ProjectResponseBody body;
-    private ProjectResponseBody otherBody;
 
     @BeforeEach
     void setUp() {
@@ -63,7 +62,7 @@ public class ProjectResponseBodyTest {
         when(project.getMinimumPercentage()).thenReturn(0.0);
         when(project.isCoverTheMinimumPercentage()).thenReturn(false);
 
-        otherBody = new ProjectResponseBody(project);
+        ProjectResponseBody otherBody = new ProjectResponseBody(project);
         otherBody.setDonations(ls);
 
         body.setName("");

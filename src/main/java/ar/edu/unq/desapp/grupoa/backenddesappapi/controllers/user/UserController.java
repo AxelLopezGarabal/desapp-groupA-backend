@@ -8,7 +8,6 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.responsebody.U
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidIdException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidOrNullFieldException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

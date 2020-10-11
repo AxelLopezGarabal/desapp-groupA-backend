@@ -110,7 +110,7 @@ public class UserServiceImp implements UserService {
     }
 
     private void validateAmount(Double amount) throws InvalidOrNullFieldException {
-        if (null == amount|| !(Double.compare(amount, 0.0) > 0)){
+        if (null == amount|| (Double.compare(amount, 0.0) < 0)){
             throw new InvalidOrNullFieldException("amount");
         }
     }

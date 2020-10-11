@@ -8,7 +8,6 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.responsebody.U
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidIdException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidOrNullFieldException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
-import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 
 import java.util.List;
 
