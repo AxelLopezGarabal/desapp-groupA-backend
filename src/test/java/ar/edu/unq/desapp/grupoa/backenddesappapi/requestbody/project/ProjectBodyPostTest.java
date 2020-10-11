@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.requestbody.project;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody.ProjectBodyPost;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,6 +36,7 @@ public class ProjectBodyPostTest {
         assertNull(body.getDeadline());
         assertNull(body.getStartDate());
         assertNull(body.getLocalityId());
+        assertNull(body.getFactor());
     }
 
     @Test
@@ -54,7 +56,23 @@ public class ProjectBodyPostTest {
         body.setStartDate(LocalDate.now());
         assertEquals(body.getStartDate(), otherBody.getStartDate());
 
+        body.setFactor(0.0);
+        assertEquals(body.getFactor(), otherBody.getFactor());
+
         body.setLocalityId(1L);
         assertEquals(body.getLocalityId(), otherBody.getLocalityId());
+    }
+
+    @Test
+    public void test02WhenADonationThatIsEmptyReceivesTheAnyGetterMessageResponseWithNull(){
+
+        Project project = otherBody.setValues(new Project());
+
+        assertEquals(otherBody.getName(), project.getName());
+        assertEquals(otherBody.getMinimumClosingPercentage(), project.getMinimumPercentage());
+        assertEquals(otherBody.getFantasyName(), project.getFantasyName());
+        assertEquals(otherBody.getDeadline(), project.getDeadline());
+        assertEquals(otherBody.getStartDate(), project.getStartDate());
+        assertEquals(otherBody.getFactor(), project.getFactor());
     }
 }

@@ -14,21 +14,26 @@ import static org.mockito.Mockito.when;
 public class WalletTest {
 
     private Wallet wallet;
+    private Wallet wallet2;
+    private PunctuationSystem system = mock(PunctuationSystem.class);
 
     @BeforeEach
     void setUp() {
         wallet = new Wallet();
+        wallet2 = new Wallet(0.0, system);
     }
 
     @AfterEach
     void tearDown() {
         wallet = null;
+        wallet2 = null;
     }
 
     @Test
     public void test01WhenAWalletReceivesTheMessageGetPointsRespondsWithItsPoints0IfItWasJustCreated(){
         Double points = 0.0;
         assertEquals(wallet.getPoints(), points);
+        assertEquals(wallet2.getPoints(), points);
     }
 
     @Test
@@ -89,5 +94,16 @@ public class WalletTest {
         wallet.setWalletId(1L);
 
         assertEquals(1L, wallet.getWalletId());
+    }
+
+    @Test
+    public void test08WhenAWalletReceivesTheMessageIt(){
+        Donation d = mock(Donation.class);
+        User u = mock(User.class);
+        when(system.pointsGainForDonation(d,u)).thenReturn(3000.0);
+
+        wallet2.gainPointsForDonation(d, u);
+
+        assertEquals(wallet2.getPoints(), 3000.0);
     }
 }
