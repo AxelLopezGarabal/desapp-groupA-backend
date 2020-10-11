@@ -29,7 +29,7 @@ public class UserResponseBody {
         this.points = user.getWallet().getPoints();
     }
 
-    private List<DonationResponseBodyUser> mapDonations(List<Donation> donations) {
+    public List<DonationResponseBodyUser> mapDonations(List<Donation> donations) {
         return donations.stream().map(DonationResponseBodyUser::new).collect(Collectors.toList());
     }
 
