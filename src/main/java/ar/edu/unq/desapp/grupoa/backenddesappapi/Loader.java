@@ -34,7 +34,6 @@ public class Loader {
         projectDAO.save(data.projectE());
     }
 
-
     public void add(PunctuationSystemDAO systemDAO, WalletDAO walletDAO, UserDAO userDAO) {
         PunctuationSystem sys = data.system();
 
