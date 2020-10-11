@@ -126,7 +126,7 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     private void validateMinPercentage(Double minimumClosingPercentage) throws InvalidOrNullFieldException {
-        if (minimumClosingPercentage == null || ! (Double.compare(minimumClosingPercentage, 0.0) > 0)){
+        if (minimumClosingPercentage == null || (Double.compare(minimumClosingPercentage, 0.0) < 0)){
             throw new InvalidOrNullFieldException("minimumClosingPercentage");
         }
     }
