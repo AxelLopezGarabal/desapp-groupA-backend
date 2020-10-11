@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.requestbody.project;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody.ProjectBodyPut;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,5 +53,24 @@ public class ProjectBodyPutTest {
 
         body.setFactor(0.0);
         assertEquals(body.getFactor(), otherBody.getFactor());
+    }
+
+    @Test
+    public void test02WhenADonationThatIsEmptyReceivesTheAnyGetterMessageResponseWithNull(){
+        body.setName("");
+        body.setMinimumClosingPercentage(0.0);
+        body.setFantasyName("");
+        body.setDeadline(LocalDate.now());
+        body.setFactor(0.0);
+
+        Project project = new Project();
+
+        body.setValues(project);
+
+        assertEquals(body.getName(), project.getName());
+        assertEquals(body.getFantasyName(), project.getFantasyName());
+        assertEquals(body.getMinimumClosingPercentage(), project.getMinimumPercentage());
+        assertEquals(body.getDeadline(), project.getDeadline());
+        assertEquals(body.getFactor(), project.getFactor());
     }
 }

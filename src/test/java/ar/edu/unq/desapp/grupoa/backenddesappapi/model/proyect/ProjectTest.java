@@ -16,6 +16,8 @@ class ProjectTest {
 
     private Project project;
     private Project defaultProject;
+    private Project project2;
+    private Project project3;
 
     private Long id = 10L;
     private String name = "aName";
@@ -30,17 +32,23 @@ class ProjectTest {
     void setUp() {
         project = new Project(id, name, minimumClosingPercentage, fantasyName, startDate, deadline, factor, locality);
         defaultProject = new Project(id, name, minimumClosingPercentage,fantasyName, startDate, deadline, locality);
+        project2 = new Project(name, minimumClosingPercentage, fantasyName, startDate, deadline, factor, locality);
+        project3 = new Project(name, minimumClosingPercentage, fantasyName, startDate, deadline, locality);
     }
 
     @AfterEach
     void tearDown() {
         project = null;
         defaultProject = null;
+        project2 = null;
+        project3 = null;
     }
 
     @Test
     public void test01WhenAProjectReceivesTheMessageGetIdRespondsWithItsId(){
         assertEquals(project.getId(), id);
+        assertNull(project2.getId());
+        assertNull(project3.getId());
     }
 
     @Test

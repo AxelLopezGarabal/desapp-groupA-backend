@@ -1,6 +1,8 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.requestbody.user;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.requestbody.UserBodyPost;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,4 +43,13 @@ public class UserBodyPostTest {
         assertEquals(body.getPassword(), "password");
     }
 
+    @Test
+    public void test02WhenADonationThatIsEmptyReceivesTheAnyGetterMessageResponseWithNull() throws MailValidation {
+        User user = body.setValues(new User());
+
+        assertEquals(body.getName(), user.getName());
+        assertEquals(body.getNickname(), user.getNickname());
+        assertEquals(body.getEmail(), user.getEmail());
+        assertEquals(body.getPassword(), user.getPassword());
+    }
 }
