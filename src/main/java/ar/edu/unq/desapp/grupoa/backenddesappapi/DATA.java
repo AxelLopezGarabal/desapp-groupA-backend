@@ -16,47 +16,73 @@ import java.util.List;
 
 public class DATA{
 
-    public Locality locality = new Locality("L1", "province", 250, 15.0);
-    public Locality locality1 = new Locality("L2", "province", 250, 25.0);
-    public Locality locality2 = new Locality("L3", "province", 2500, 35.0);
-    public Locality locality3 = new Locality("L4", "province", 25000, 45.0);
+    private Locality locality = new Locality("L1", "province", 250, 15.0);
+    private Locality locality1 = new Locality("L2", "province", 250, 25.0);
+    private Locality locality2 = new Locality("L3", "province", 2500, 35.0);
+    private Locality locality3 = new Locality("L4", "province", 25000, 45.0);
 
-    public Project projectA = new Project("P1", 9000.0, "FP1", LocalDate.now(), LocalDate.now(), locality);
-    public Project projectB = new Project("P2", 8000.0, "FP2", LocalDate.now(), LocalDate.now(), 2000.0, locality1);
-    public Project projectC = new Project("P3", 10000.0, "FP3", LocalDate.now(), LocalDate.now(), locality);
-    public Project projectD = new Project("P4", 11000.0, "FP4", LocalDate.now(), LocalDate.now(), 5000.0, locality3);
-    Project projectE = new Project("P5", 12000.0, "FP5", LocalDate.now(), LocalDate.now(), locality2);
+    private Project project = new Project("P1", 9000.0, "FP1", LocalDate.now(), LocalDate.now(), this.locality);
+    private Project projectB = new Project("P2", 8000.0, "FP2", LocalDate.now(), LocalDate.now(), 2000.0, this.locality1);
+    private Project projectC = new Project("P3", 10000.0, "FP3", LocalDate.now(), LocalDate.now(), this.locality);
+    private Project projectD = new Project("P4", 11000.0, "FP4", LocalDate.now(), LocalDate.now(), 5000.0, this.locality3);
+    private Project projectE = new Project("P5", 12000.0, "FP5", LocalDate.now(), LocalDate.now(), this.locality2);
 
-    public Donation donation = new Donation(200.0, "nickname", projectA);
+    private Donation donation = new Donation(200.0, "nickname", this.project());
+    private Donation d1 = new Donation(20.0, "init", this.projectE);
+    private Donation d2 = new Donation(20.0, "init", this.projectE);
+    private Donation d3 = new Donation(20.0, "init", this.projectE);
+    private Donation d4 = new Donation(20.0, "init", this.projectE);
 
-    public Donation d1 = new Donation(20.0, "init", projectE);
-    public Donation d2 = new Donation(20.0, "init", projectE);
-    public Donation d3 = new Donation(20.0, "init", projectE);
-    public Donation d4 = new Donation(20.0, "init", projectE);
+    private InvertedLocality forLocality = new InvertedLocality();
+    private InvertedCash forCash = new InvertedCash();
+    private TimesInTheMonth forTimes = new TimesInTheMonth();
+    private List<IRule> lsRules = new ArrayList<>();
+    private Product product = new Product("name", 0.0, "/img", 0);
+    private List<Product> lsProduct = new ArrayList<>();
+    private PunctuationSystem system = new PunctuationSystem();
 
-    public Project p5(){
-        projectE.receiveNewDonation(d1);
-        projectE.receiveNewDonation(d2);
-        projectE.receiveNewDonation(d3);
-        projectE.receiveNewDonation(d4);
-        return projectE;
+    public Locality locality(){
+        return this.locality;
     }
-
-    public InvertedLocality forLocality = new InvertedLocality();
-    public InvertedCash forCash = new InvertedCash();
-    public TimesInTheMonth forTimes = new TimesInTheMonth();
-
-    public List<IRule> lsRules(){
-        return new ArrayList<>();
+    public Locality locality1(){
+        return this.locality1;
     }
-
-    public Product product = new Product("name", 0.0, "/img", 0);
-
-    public List<Product> lsProduct(){
-        return new ArrayList<>();
+    public Locality locality2(){
+        return this.locality2;
     }
+    public Locality locality3() {
+        return this.locality3;
+    }
+    public Donation donation(){return this.donation;}
+    public InvertedCash forCash(){return this.forCash;}
+    public InvertedLocality forLocality(){return this.forLocality;}
+    public TimesInTheMonth forTimes(){return this.forTimes;}
 
-    public PunctuationSystem system(){
-        return new PunctuationSystem();
+    public List<IRule> lsRules(){return this.lsRules;}
+
+    public Product product(){return this.product;}
+
+    public List<Product> lsProduct(){return this.lsProduct;}
+
+    public PunctuationSystem system(){return this.system;}
+
+    public Project project(){
+        return this.project;
+    }
+    public Project projectB(){
+        return this.projectB;
+    }
+    public Project projectC(){
+        return this.projectC;
+    }
+    public Project projectD(){
+        return this.projectD;
+    }
+    public Project projectE(){
+        this.projectE.receiveNewDonation(this.d1);
+        this.projectE.receiveNewDonation(this.d2);
+        this.projectE.receiveNewDonation(this.d3);
+        this.projectE.receiveNewDonation(this.d4);
+        return this.projectE;
     }
 }

@@ -19,19 +19,19 @@ public class Loader {
     private DATA data = new DATA();
 
     public void addLocalitiesEntities(LocalityDAO localityDAO) {
-        localityDAO.save(data.locality);
-        localityDAO.save(data.locality1);
-        localityDAO.save(data.locality2);
-        localityDAO.save(data.locality3);
+        localityDAO.save(data.locality());
+        localityDAO.save(data.locality1());
+        localityDAO.save(data.locality2());
+        localityDAO.save(data.locality3());
     }
 
     public void addProjectEntities(ProjectDAO projectDAO) {
-        data.projectA.receiveNewDonation(data.donation);
-        projectDAO.save(data.projectA);
-        projectDAO.save(data.projectB);
-        projectDAO.save(data.projectC);
-        projectDAO.save(data.projectD);
-        projectDAO.save(data.p5());
+        data.project().receiveNewDonation(data.donation());
+        projectDAO.save(data.project());
+        projectDAO.save(data.projectB());
+        projectDAO.save(data.projectC());
+        projectDAO.save(data.projectD());
+        projectDAO.save(data.projectE());
     }
 
 
@@ -39,14 +39,14 @@ public class Loader {
         PunctuationSystem sys = data.system();
 
         List<IRule> ls = data.lsRules();
-        ls.add(data.forCash);
-        ls.add(data.forLocality);
-        ls.add(data.forTimes);
+        ls.add(data.forCash());
+        ls.add(data.forLocality());
+        ls.add(data.forTimes());
 
         sys.setRules(ls);
 
         List<Product> lps = data.lsProduct();
-        lps.add(data.product);
+        lps.add(data.product());
 
         sys.setProductList(lps);
 
