@@ -1,6 +1,8 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.locality;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.locality.requestbody.LocalityBodyPost;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidIdException;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidOrNullFieldException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Locality;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.service.locality.LocalityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +35,14 @@ public class LocalityController {
 
     //get_ONE
     @RequestMapping(value = "/locality/{id}", method = RequestMethod.GET)
-    public ResponseEntity getLocality(@PathVariable Integer id){
+    public ResponseEntity getLocality(@PathVariable Integer id) throws InvalidIdException {
         Locality recoveredLocality = localityService.getById(id);
         return new ResponseEntity(recoveredLocality, HttpStatus.OK);
     }
 
     //ADD_ONE
     @RequestMapping(value = "/locality/", method = RequestMethod.POST)
-    public ResponseEntity addLocality(@RequestBody LocalityBodyPost locality){
+    public ResponseEntity addLocality(@RequestBody LocalityBodyPost locality) throws InvalidOrNullFieldException {
         localityService.save(locality);
         return new ResponseEntity(HttpStatus.OK);
     }

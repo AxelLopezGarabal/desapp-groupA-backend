@@ -21,12 +21,17 @@ public class Loader {
     public void addLocalitiesEntities(LocalityDAO localityDAO) {
         localityDAO.save(data.locality);
         localityDAO.save(data.locality1);
+        localityDAO.save(data.locality2);
+        localityDAO.save(data.locality3);
     }
 
     public void addProjectEntities(ProjectDAO projectDAO) {
         data.projectA.receiveNewDonation(data.donation);
         projectDAO.save(data.projectA);
         projectDAO.save(data.projectB);
+        projectDAO.save(data.projectC);
+        projectDAO.save(data.projectD);
+        projectDAO.save(data.p5());
     }
 
 

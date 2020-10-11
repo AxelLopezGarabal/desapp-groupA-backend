@@ -4,17 +4,19 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody.ProjectBodyPut;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.responsebody.ProjectResponseBody;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.responsebody.ProjectResponseBodyList;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidIdException;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidOrNullFieldException;
 
 import java.util.List;
 
 public interface ProjectService {
     List<ProjectResponseBodyList> listAllProjects();
 
-    ProjectResponseBody getById(Integer id);
+    ProjectResponseBody getById(Integer id) throws InvalidIdException;
 
-    void save(ProjectBodyPost project);
+    void save(ProjectBodyPost project) throws InvalidOrNullFieldException, InvalidIdException;
 
-    void delete(Integer id);
+    void delete(Integer id) throws InvalidIdException;
 
-    void update(ProjectBodyPut project, Long id);
+    ProjectResponseBody update(ProjectBodyPut project, Long id) throws InvalidIdException, InvalidOrNullFieldException;
 }

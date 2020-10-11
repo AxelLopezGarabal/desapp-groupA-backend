@@ -5,6 +5,8 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.requestbody.Us
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.requestbody.UserBodyPut;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.responsebody.UserResponseBody;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.responsebody.UserResponseBodyList;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidIdException;
+import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidOrNullFieldException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.service.user.UserService;
@@ -38,35 +40,35 @@ public class UserController {
 
     //get_ONE
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public ResponseEntity getUser(@PathVariable Integer id){
+    public ResponseEntity getUser(@PathVariable Integer id) throws InvalidIdException {
         UserResponseBody recoveredUser = userService.getById(id);
         return new ResponseEntity(recoveredUser, HttpStatus.OK);
     }
 
-    //update
+    //update exception for id and body
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public  ResponseEntity updateUser(@RequestBody UserBodyPut user, @PathVariable Long id){
+    public  ResponseEntity updateUser(@RequestBody UserBodyPut user, @PathVariable Long id) throws MailValidation, InvalidIdException, InvalidOrNullFieldException {
         userService.update(user, id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    //ADD_ONE
+    //ADD_ONE exception for body
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-    public ResponseEntity save(@RequestBody UserBodyPost user) throws MailValidation {
+    public ResponseEntity save(@RequestBody UserBodyPost user) throws MailValidation, InvalidOrNullFieldException {
         userService.save(user);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    //DELETE_ONE
+    //DELETE_ONE exception for id
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteUser(@PathVariable Integer id){
+    public ResponseEntity deleteUser(@PathVariable Integer id) throws InvalidIdException {
         userService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    //DONATE
+    //DONATE exception for id and body
     @RequestMapping(value = "/user/{id}/donate", method = RequestMethod.POST)
-    public ResponseEntity donate(@PathVariable Integer id, @RequestBody DonationRequestBody body){
+    public ResponseEntity donate(@PathVariable Integer id, @RequestBody DonationRequestBody body) throws InvalidIdException, InvalidOrNullFieldException {
         userService.donate(id, body);
         return new ResponseEntity(HttpStatus.OK);
     }
