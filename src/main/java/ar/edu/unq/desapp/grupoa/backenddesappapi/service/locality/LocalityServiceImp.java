@@ -13,8 +13,7 @@ import java.util.List;
 @Service
 public class LocalityServiceImp implements LocalityService {
 
-    @Autowired
-    private LocalityDAO localityDAO;
+    private @Autowired LocalityDAO localityDAO;
 
     @Override
     public List<Locality> getLocalitiesDetails() {

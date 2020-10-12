@@ -12,6 +12,7 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Locality;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,79 +21,61 @@ import java.util.stream.Collectors;
 @Service
 public class ProjectServiceImp implements ProjectService {
 
-    @Autowired
-    private ProjectDAO projectDAO;
-    @Autowired
-    private LocalityDAO localityDAO;
-
+    private @Autowired ProjectDAO projectDAO;
+    private @Autowired LocalityDAO localityDAO;
 
     @Override
     public List<ProjectResponseBodyList> listAllProjects() {
-        return ((List<Project>) projectDAO.findAll()).stream()
-                .map(ProjectResponseBodyList::new).collect(Collectors.toList());
+        return ((List<Project>) projectDAO.findAll())
+                .stream()
+                .map(ProjectResponseBodyList::new)
+                .collect(Collectors.toList());
     }
 
     @Override
     public ProjectResponseBody getById(Integer id) throws InvalidIdException {
         Long value = Long.valueOf(id);
-        try{
-            validateId(value);
-            Project recoverProject = projectDAO.findById(value).orElse(new Project());
-            return new ProjectResponseBody(recoverProject);
-        }
-        catch (Error e){
-            return null;
-        }
+        validateId(value);
+        Project recoverProject = projectDAO.findById(value).orElse(new Project());
+        return new ProjectResponseBody(recoverProject);
     }
 
     @Override
     public void save(ProjectBodyPost body) throws InvalidOrNullFieldException, InvalidIdException  {
-        try{
-            this.validateNewProjectBody(body);
-            Locality locality = localityDAO.findById(body.getLocalityId()).orElse(new Locality());
-            Project project = new Project();
-            projectDAO.save(project.setBody(body, locality));
-        }
-        catch (Error e){
-        }
+        this.validateNewProjectBody(body);
+        Locality locality = localityDAO.findById(body.getLocalityId()).orElse(new Locality());
+        Project project = new Project();
+        projectDAO.save(project.setBody(body, locality));
     }
 
     @Override
     public void delete(Integer id) throws InvalidIdException {
         Long value = Long.valueOf(id);
-        try{
-            validateId(value);
-            projectDAO.deleteById(value);
-        }catch (Error e){
-
-        }
+        validateId(value);
+        projectDAO.deleteById(value);
     }
 
     @Override
     public ProjectResponseBody update(ProjectBodyPut project, Long id) throws InvalidIdException, InvalidOrNullFieldException {
         Long value = Long.valueOf(id);
-        try{
-            this.validateId(value);
+        this.validateId(value);
 
-            Project recoveredProject = projectDAO.findById(value).orElse(new Project());
+        Project recoveredProject = projectDAO.findById(value).orElse(new Project());
 
-            this.validateName(project.getName());
-            this.validateFantasyName(project.getFantasyName());
-            this.validateDeadline(project.getDeadline(), recoveredProject.getStartDate());
-            this.validateMinPercentage(project.getMinimumClosingPercentage());
-            this.validateFactor(project.getFactor());
+        this.validateName(project.getName());
+        this.validateFantasyName(project.getFantasyName());
+        this.validateDeadline(project.getDeadline(), recoveredProject.getStartDate());
+        this.validateMinPercentage(project.getMinimumClosingPercentage());
+        this.validateFactor(project.getFactor());
 
-            recoveredProject.updateProject(project);
-            projectDAO.save(recoveredProject);
+        recoveredProject.updateProject(project);
+        projectDAO.save(recoveredProject);
 
-            return new ProjectResponseBody(recoveredProject);
-        }catch (Error r){
-            return null;
-        }
+        return new ProjectResponseBody(recoveredProject);
     }
 
     private void validateId(Long id) throws InvalidIdException {
-        if (! projectDAO.existsById(id)){
+        if (!projectDAO.existsById(id)){
             throw new InvalidIdException(id);
         }
     }
@@ -138,13 +121,13 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     private void validateFantasyName(String fantasyName) throws InvalidOrNullFieldException {
-        if (fantasyName == null || fantasyName.equals("")){
+        if (!StringUtils.hasText(fantasyName)){
             throw new InvalidOrNullFieldException("fantasyName");
         }
     }
 
     private void validateName(String name) throws InvalidOrNullFieldException {
-        if (name == null || name.equals("")){
+        if (!StringUtils.hasText(name)){
             throw new InvalidOrNullFieldException("name");
         }
     }

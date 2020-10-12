@@ -9,46 +9,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/locality")
+@CrossOrigin(origins = "*")
 public class LocalityController {
 
-    @Autowired
-    private LocalityService localityService;
+    private @Autowired LocalityService localityService;
 
     public LocalityController(LocalityService localityService) {
         this.localityService = localityService;
     }
 
     //get_ALL
-    @RequestMapping(value = "/locality/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     public ResponseEntity  listLocalities() {
         List<Locality> localitiesDetails = localityService.getLocalitiesDetails();
         return new ResponseEntity (localitiesDetails, HttpStatus.OK);
     }
 
     //get_ONE
-    @RequestMapping(value = "/locality/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity getLocality(@PathVariable Integer id) throws InvalidIdException {
         Locality recoveredLocality = localityService.getById(id);
         return new ResponseEntity(recoveredLocality, HttpStatus.OK);
     }
 
     //ADD_ONE
-    @RequestMapping(value = "/locality/", method = RequestMethod.POST)
+    @PostMapping(value = "/")
     public ResponseEntity addLocality(@RequestBody LocalityBodyPost locality) throws InvalidOrNullFieldException {
         localityService.save(locality);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     //DELETE_ONE
-    @RequestMapping(value = "/locality/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteLocality(@PathVariable Integer id){
         localityService.delete(id);
         return new ResponseEntity(HttpStatus.OK);

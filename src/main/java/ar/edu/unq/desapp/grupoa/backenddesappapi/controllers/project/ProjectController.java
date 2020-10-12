@@ -15,45 +15,46 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/project")
+@CrossOrigin(origins = "*")
 public class ProjectController {
 
-    @Autowired
-    private ProjectService projectService;
+    private @Autowired ProjectService projectService;
 
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }
 
     //get_ALL
-    @RequestMapping(value = "/project/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     public ResponseEntity listProjects() {
         List<ProjectResponseBodyList> projectsDetails = projectService.listAllProjects();
         return new ResponseEntity (projectsDetails, HttpStatus.OK);
     }
 
     //get_ONE
-    @GetMapping(value = "/project/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity getProject(@PathVariable Integer id) throws InvalidIdException {
         ProjectResponseBody recoveredProject = projectService.getById(id);
         return new ResponseEntity(recoveredProject, HttpStatus.OK);
     }
 
     //update
-    @RequestMapping(value = "/project/{id}", method = RequestMethod.PUT)
+    @PutMapping(value = "/{id}")
     public  ResponseEntity updateProject(@RequestBody ProjectBodyPut project, @PathVariable Long id) throws InvalidIdException, InvalidOrNullFieldException {
         ProjectResponseBody response = projectService.update(project, id);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
     //ADD_ONE
-    @RequestMapping(value = "/project/", method = RequestMethod.POST)
+    @PostMapping(value = "/")
     public ResponseEntity addProject(@RequestBody ProjectBodyPost projectBody) throws InvalidOrNullFieldException, InvalidIdException {
         projectService.save(projectBody);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     //DELETE_ONE
-    @RequestMapping(value = "/project/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteProject(@PathVariable Integer id) throws InvalidIdException {
         projectService.delete(id);
         return new ResponseEntity(HttpStatus.OK);

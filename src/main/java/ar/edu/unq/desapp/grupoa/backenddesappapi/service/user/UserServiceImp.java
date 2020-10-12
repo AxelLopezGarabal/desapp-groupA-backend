@@ -18,21 +18,17 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.Wallet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImp implements UserService {
 
-    @Autowired
-    private UserDAO userDAO;
-    @Autowired
-    private PunctuationSystemDAO systemDAO;
-    @Autowired
-    private WalletDAO walletDAO;
-    @Autowired
-    private ProjectDAO projectDAO;
+    private @Autowired UserDAO userDAO;
+    private @Autowired PunctuationSystemDAO systemDAO;
+    private @Autowired WalletDAO walletDAO;
+    private @Autowired ProjectDAO projectDAO;
 
     @Override
     public List<UserResponseBodyList> listAllUsers() {
@@ -41,67 +37,50 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserResponseBody getById(Integer id) throws InvalidIdException {
-        try{
-            Long value = Long.valueOf(id);
-            this.validateId(value);
-            User userRecovered = userDAO.findById(value).orElse(new User());
-            return new UserResponseBody(userRecovered);
-        }catch (Error e){
-            return null;
-        }
+        Long value = Long.valueOf(id);
+        this.validateId(value);
+        User userRecovered = userDAO.findById(value).orElse(new User());
+        return new UserResponseBody(userRecovered);
     }
 
     @Override
     public void update(UserBodyPut body, Long id) throws InvalidIdException, MailValidation, InvalidOrNullFieldException {
-        try{
-            Long value = Long.valueOf(id);
-            this.validateId(value);
-            this.validateBodyPut(body);
-            User recover = userDAO.findById(value).orElse(new User());
-            recover.updateUser(body);
-        }catch (Error ignored){
-
-        }
+        Long value = Long.valueOf(id);
+        this.validateId(value);
+        this.validateBodyPut(body);
+        User recover = userDAO.findById(value).orElse(new User());
+        recover.updateUser(body);
     }
 
     @Override
     public void delete(Integer id) throws InvalidIdException {
-        try{
-            Long value = Long.valueOf(id);
-            this.validateId(value);
-            userDAO.deleteById(value);
-        }catch (Error ignored){
-            
-        }
+        Long value = Long.valueOf(id);
+        this.validateId(value);
+        userDAO.deleteById(value);
     }
 
     @Override
     public void save(UserBodyPost user) throws MailValidation, InvalidOrNullFieldException {
-        try{
-            this.validateName(user.getName());
-            this.validateNickName(user.getNickname());
-            this.validatePassword(user.getPassword());
-            PunctuationSystem system = systemDAO.findAll().iterator().next();
-            Wallet newWallet = walletDAO.save(new Wallet(0.0, system));
-            User newUser = ((new User()).setUser(user));
-            newUser.setWallet(newWallet);
-            userDAO.save(newUser);
-        }
-        catch (Error ignore){}
+        this.validateName(user.getName());
+        this.validateNickName(user.getNickname());
+        this.validatePassword(user.getPassword());
+        PunctuationSystem system = systemDAO.findAll().iterator().next();
+        Wallet newWallet = walletDAO.save(new Wallet(0.0, system));
+        User newUser = ((new User()).setUser(user));
+        newUser.setWallet(newWallet);
+        userDAO.save(newUser);
     }
 
     @Override
     public void donate(Integer id, DonationRequestBody body) throws InvalidIdException, InvalidOrNullFieldException {
-        try{
-            Long value = Long.valueOf(id);
-            this.validateId(value);
-            this.validateDonationRequest(body);
-            User recoveredUser = userDAO.findById(value).orElse(new User());
-            Project recoveredProject = projectDAO.findById(Long.valueOf(body.getProjectId())).orElse(new Project());
-            recoveredUser.createDonation(body.getAmount(), recoveredProject);
-            userDAO.save(recoveredUser);
-            projectDAO.save(recoveredProject);
-        }catch (Error ignore){}
+        Long value = Long.valueOf(id);
+        this.validateId(value);
+        this.validateDonationRequest(body);
+        User recoveredUser = userDAO.findById(value).orElse(new User());
+        Project recoveredProject = projectDAO.findById(Long.valueOf(body.getProjectId())).orElse(new Project());
+        recoveredUser.createDonation(body.getAmount(), recoveredProject);
+        userDAO.save(recoveredUser);
+        projectDAO.save(recoveredProject);
     }
 
     private void validateDonationRequest(DonationRequestBody body) throws InvalidIdException, InvalidOrNullFieldException {
@@ -110,14 +89,14 @@ public class UserServiceImp implements UserService {
     }
 
     private void validateAmount(Double amount) throws InvalidOrNullFieldException {
-        if (null == amount|| (Double.compare(amount, 0.0) < 0)){
+        if (amount == null || (Double.compare(amount, 0.0) < 0)){
             throw new InvalidOrNullFieldException("amount");
         }
     }
 
     private void validateProjectId(Integer projectId) throws InvalidIdException {
         Long value = Long.valueOf(projectId);
-        if (! projectDAO.existsById(value)){
+        if (!projectDAO.existsById(value)){
             throw new InvalidIdException(value);
         }
     }
@@ -129,25 +108,25 @@ public class UserServiceImp implements UserService {
     }
 
     private void validatePassword(String password) throws InvalidOrNullFieldException {
-        if (password == null || password.equals("")){
+        if (!StringUtils.hasText(password)){
             throw new InvalidOrNullFieldException("password");
         }
     }
 
     private void validateNickName(String nickname) throws InvalidOrNullFieldException {
-        if (nickname == null || nickname.equals("")){
+        if (!StringUtils.hasText(nickname)){
             throw new InvalidOrNullFieldException("nickname");
         }
     }
 
     private void validateName(String name) throws InvalidOrNullFieldException {
-        if (name == null || name.equals("")){
+        if (!StringUtils.hasText(name)){
             throw new InvalidOrNullFieldException("name");
         }
     }
 
     private void validateId(Long id) throws InvalidIdException {
-        if (! userDAO.existsById(id)){
+        if (!userDAO.existsById(id)){
             throw new InvalidIdException(id);
         }
     }

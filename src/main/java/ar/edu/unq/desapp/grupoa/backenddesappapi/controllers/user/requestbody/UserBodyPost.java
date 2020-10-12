@@ -2,8 +2,10 @@ package ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.requestbody;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
+import com.sun.istack.NotNull;
 
 public class UserBodyPost {
+    @NotNull
     private String name;
     private String nickname;
     private String email;
