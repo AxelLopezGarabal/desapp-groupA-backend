@@ -1,11 +1,16 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.locality.requestbody;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Locality;
+import io.swagger.annotations.ApiModelProperty;
 
 public class LocalityBodyPost {
+    @ApiModelProperty(value = "name of the Locality to add", required = true, example = "Berazategui")
     private String name;
+    @ApiModelProperty(value = "name of the Province of the locality", required = true, example = "Buenos Aires")
     private String province;
+    @ApiModelProperty(value = "amount of the population of the locality", required = true, example = "150000")
     private Integer population;
+    @ApiModelProperty(value = "state of connection of the locality", required = true, example = "50.0")
     private Double stateOfConnection;
 
     public LocalityBodyPost(){}
@@ -49,6 +54,7 @@ public class LocalityBodyPost {
         this.stateOfConnection = stateOfConnection;
     }
 
+    @ApiModelProperty(value = "", required = false, hidden = true)
     public Locality setValues(Locality locality) {
         locality.setName(this.name);
         locality.setProvince(this.province);

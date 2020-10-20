@@ -2,13 +2,16 @@ package ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.user.requestbody;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.MailValidation;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.user.User;
-import com.sun.istack.NotNull;
+import io.swagger.annotations.ApiModelProperty;
 
 public class UserBodyPost {
-    @NotNull
+    @ApiModelProperty(value = "name of the user", required = true, example = "Marie")
     private String name;
+    @ApiModelProperty(value = "nickname of the user", required = true, example = "Lady")
     private String nickname;
+    @ApiModelProperty(value = "email of the user", required = true, example = "marieAnn@gmail.com")
     private String email;
+    @ApiModelProperty(value = "password of the user", required = true, example = "$181Dollars")
     private String password;
 
     public UserBodyPost(String name, String nickname, String email, String password){
@@ -18,6 +21,7 @@ public class UserBodyPost {
         this.password = password;
     }
 
+    @ApiModelProperty(value = "", required = false, hidden = true)
     public User setValues(User user) throws MailValidation {
         user.setName(this.name);
         user.setNickname(this.nickname);

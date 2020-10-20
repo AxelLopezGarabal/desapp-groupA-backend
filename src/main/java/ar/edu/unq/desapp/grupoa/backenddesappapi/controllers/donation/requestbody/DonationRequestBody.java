@@ -1,8 +1,12 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.donation.requestbody;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class DonationRequestBody {
 
+    @ApiModelProperty(value = "id of the target project", required = true, example = "20")
     private Integer projectId;
+    @ApiModelProperty(value = "amount donated to the project", required = true, example = "1000")
     private Double amount;
 
     public DonationRequestBody(){}
