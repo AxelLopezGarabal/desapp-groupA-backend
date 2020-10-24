@@ -5,6 +5,7 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidIdException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidOrNullFieldException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Locality;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.service.locality.LocalityService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,29 +26,32 @@ public class LocalityController {
     }
 
     //get_ALL
-    @GetMapping(value = "/list")
-    public ResponseEntity  listLocalities() {
-        List<Locality> localitiesDetails = localityService.getLocalitiesDetails();
-        return new ResponseEntity (localitiesDetails, HttpStatus.OK);
+    @GetMapping(value = "/list", produces = { "application/json" })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all localities",response = Locality.class, responseContainer = "List"),
+    })
+    public ResponseEntity<List>  listLocalities() {
+        return new ResponseEntity<> (localityService.getLocalitiesDetails(), HttpStatus.OK);
     }
 
     //get_ONE
-    @GetMapping(value = "/{id}")
-    public ResponseEntity getLocality(@PathVariable Integer id) throws InvalidIdException {
-        Locality recoveredLocality = localityService.getById(id);
-        return new ResponseEntity(recoveredLocality, HttpStatus.OK);
+    @GetMapping(value = "/{id}", produces = { "application/json" })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of a locality",response = Locality.class),
+    })
+    public ResponseEntity<Locality> getLocality(@PathVariable Integer id) throws InvalidIdException {
+        return new ResponseEntity<>(localityService.getById(id), HttpStatus.OK);
     }
 
     //ADD_ONE
-    @PostMapping(value = "/")
-    public ResponseEntity addLocality(@RequestBody LocalityBodyPost locality) throws InvalidOrNullFieldException {
-        localityService.save(locality);
-        return new ResponseEntity(HttpStatus.OK);
+    @PostMapping(value = "/", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity<Integer> addLocality(@RequestBody LocalityBodyPost locality) throws InvalidOrNullFieldException {
+        return new ResponseEntity<>(localityService.save(locality), HttpStatus.OK);
     }
 
     //DELETE_ONE
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteLocality(@PathVariable Integer id){
+    @DeleteMapping(value = "/{id}", produces = { "application/json" })
+    public ResponseEntity deleteLocality(@PathVariable Integer id) throws InvalidIdException {
         localityService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }

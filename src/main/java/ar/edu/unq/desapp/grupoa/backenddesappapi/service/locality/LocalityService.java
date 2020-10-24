@@ -13,7 +13,7 @@ public interface LocalityService {
 
     Locality getById(Integer id) throws InvalidIdException;
 
-    void save(LocalityBodyPost locality) throws InvalidOrNullFieldException;
+    int save(LocalityBodyPost locality) throws InvalidOrNullFieldException;
 
-    void delete(Integer id);
+    void delete(Integer id) throws InvalidIdException;
 }

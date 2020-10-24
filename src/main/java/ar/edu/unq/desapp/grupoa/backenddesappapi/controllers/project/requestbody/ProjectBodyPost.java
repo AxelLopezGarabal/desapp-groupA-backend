@@ -1,17 +1,24 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
 
 public class ProjectBodyPost {
-
+    @ApiModelProperty(value = "name of the project", required = true, example = "Berazategui_56%->60%_2020")
     private String name;
+    @ApiModelProperty(value = "minimum closing percentage of the project", required = true, example = "60.0")
     private Double minimumClosingPercentage;
+    @ApiModelProperty(value = "the fantasy name of the project", required = true, example = "Bera_2020_60%")
     private String fantasyName;
+    @ApiModelProperty(value = "date when starts(format YYYY-MM-DD)", required = true, example = "2020-12-27")
     private LocalDate startDate;
+    @ApiModelProperty(value = "date when ends(format YYYY-MM-DD)", required = true, example = "2022-12-27")
     private LocalDate deadline;
+    @ApiModelProperty(value = "amount for person in the locality", example = "1000")
     private Double factor;
+    @ApiModelProperty(value = "the locality id", required = true,example = "3")
     private Long localityId;
 
     public ProjectBodyPost(){}
@@ -82,6 +89,7 @@ public class ProjectBodyPost {
         this.minimumClosingPercentage = minimumClosingPercentage;
     }
 
+    @ApiModelProperty(value = "", required = false, hidden = true)
     public Project setValues(Project project) {
         project.setName(this.name);
         project.setMinimumPercentage(this.minimumClosingPercentage);

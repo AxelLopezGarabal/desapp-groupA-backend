@@ -1,14 +1,21 @@
 package ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.requestbody;
 
 import ar.edu.unq.desapp.grupoa.backenddesappapi.model.proyect.Project;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
 
 public class ProjectBodyPut {
+    @ApiModelProperty(value = "new name of the project", required = true,
+            example = "Berazategui_56%->70%_2020")
     private String name;
+    @ApiModelProperty(value = "new minimum closing percentage", required = true, example = "70.0")
     private Double minimumClosingPercentage;
+    @ApiModelProperty(value = "new fantasy name of the project", required = true, example = "Bera_70%_2020")
     private String fantasyName;
+    @ApiModelProperty(value = "new deadline of the project(format YYYY-MM-DD)", required = true, example = "2120-12-27")
     private LocalDate deadline;
+    @ApiModelProperty(value = "new amount per person in the locality", required = true, example = "30000")
     private Double factor;
 
     public ProjectBodyPut(){}
@@ -61,6 +68,7 @@ public class ProjectBodyPut {
         this.factor = factor;
     }
 
+    @ApiModelProperty(value = "", required = false, hidden = true)
     public void setValues(Project project) {
         project.setName(this.name);
         project.setFantasyName(this.fantasyName);
