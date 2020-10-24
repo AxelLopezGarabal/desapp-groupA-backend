@@ -14,7 +14,7 @@ public interface ProjectService {
 
     ProjectResponseBody getById(Integer id) throws InvalidIdException;
 
-    void save(ProjectBodyPost project) throws InvalidOrNullFieldException, InvalidIdException;
+    Integer save(ProjectBodyPost project) throws InvalidOrNullFieldException, InvalidIdException;
 
     void delete(Integer id) throws InvalidIdException;
 

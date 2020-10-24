@@ -13,7 +13,7 @@ public class ProjectBodyPut {
     private Double minimumClosingPercentage;
     @ApiModelProperty(value = "new fantasy name of the project", required = true, example = "Bera_70%_2020")
     private String fantasyName;
-    @ApiModelProperty(value = "new deadline of the project", required = true, example = "25-12-2120")
+    @ApiModelProperty(value = "new deadline of the project(format YYYY-MM-DD)", required = true, example = "2120-12-27")
     private LocalDate deadline;
     @ApiModelProperty(value = "new amount per person in the locality", required = true, example = "30000")
     private Double factor;

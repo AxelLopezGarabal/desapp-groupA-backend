@@ -41,11 +41,11 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public void save(ProjectBodyPost body) throws InvalidOrNullFieldException, InvalidIdException  {
+    public Integer save(ProjectBodyPost body) throws InvalidOrNullFieldException, InvalidIdException  {
         this.validateNewProjectBody(body);
         Locality locality = localityDAO.findById(body.getLocalityId()).orElse(new Locality());
         Project project = new Project();
-        projectDAO.save(project.setBody(body, locality));
+        return projectDAO.save(project.setBody(body, locality)).getId().intValue();
     }
 
     @Override

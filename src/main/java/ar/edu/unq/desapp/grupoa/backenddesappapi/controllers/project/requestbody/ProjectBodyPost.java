@@ -12,9 +12,9 @@ public class ProjectBodyPost {
     private Double minimumClosingPercentage;
     @ApiModelProperty(value = "the fantasy name of the project", required = true, example = "Bera_2020_60%")
     private String fantasyName;
-    @ApiModelProperty(value = "date when starts", required = true, example = "27-10-2020")
+    @ApiModelProperty(value = "date when starts(format YYYY-MM-DD)", required = true, example = "2020-12-27")
     private LocalDate startDate;
-    @ApiModelProperty(value = "date when ends", required = true, example = "27-10-2022")
+    @ApiModelProperty(value = "date when ends(format YYYY-MM-DD)", required = true, example = "2022-12-27")
     private LocalDate deadline;
     @ApiModelProperty(value = "amount for person in the locality", example = "1000")
     private Double factor;

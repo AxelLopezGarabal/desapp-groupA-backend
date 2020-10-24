@@ -7,6 +7,8 @@ import ar.edu.unq.desapp.grupoa.backenddesappapi.controllers.project.responsebod
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidIdException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.exception.InvalidOrNullFieldException;
 import ar.edu.unq.desapp.grupoa.backenddesappapi.service.project.ProjectService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,36 +29,44 @@ public class ProjectController {
 
     //get_ALL
     @GetMapping(value = "/list", produces = { "application/json" })
-    public ResponseEntity listProjects() {
-        List<ProjectResponseBodyList> projectsDetails = projectService.listAllProjects();
-        return new ResponseEntity (projectsDetails, HttpStatus.OK);
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users", response = ProjectResponseBodyList.class, responseContainer = "List"),
+    })
+    public ResponseEntity<List> listProjects() {
+        return new ResponseEntity<> (projectService.listAllProjects(), HttpStatus.OK);
     }
 
     //get_ONE
     @GetMapping(value = "/{id}", produces = { "application/json" })
-    public ResponseEntity getProject(@PathVariable Integer id) throws InvalidIdException {
-        ProjectResponseBody recoveredProject = projectService.getById(id);
-        return new ResponseEntity(recoveredProject, HttpStatus.OK);
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = ProjectResponseBody.class),
+    })
+    public ResponseEntity<ProjectResponseBody> getProject(@PathVariable Integer id) throws InvalidIdException {
+        return new ResponseEntity<>(projectService.getById(id), HttpStatus.OK);
     }
 
     //update
     @PutMapping(value = "/{id}", produces = { "application/json" },consumes = { "application/json" })
-    public  ResponseEntity updateProject(@RequestBody ProjectBodyPut project, @PathVariable Long id) throws InvalidIdException, InvalidOrNullFieldException {
-        ProjectResponseBody response = projectService.update(project, id);
-        return new ResponseEntity(response, HttpStatus.OK);
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = ProjectResponseBody.class),
+    })
+    public  ResponseEntity<ProjectResponseBody> updateProject(@RequestBody ProjectBodyPut project, @PathVariable Long id) throws InvalidIdException, InvalidOrNullFieldException {
+        return new ResponseEntity<>(projectService.update(project, id), HttpStatus.OK);
     }
 
     //ADD_ONE
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
     @PostMapping(value = "/", produces = { "application/json" },consumes = { "application/json" })
-    public ResponseEntity addProject(@RequestBody ProjectBodyPost projectBody) throws InvalidOrNullFieldException, InvalidIdException {
-        projectService.save(projectBody);
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<Integer> addProject(@RequestBody ProjectBodyPost projectBody) throws InvalidOrNullFieldException, InvalidIdException {
+        return new ResponseEntity<>(projectService.save(projectBody), HttpStatus.OK);
     }
 
     //DELETE_ONE
     @DeleteMapping(value = "/{id}", produces = { "application/json" })
-    public ResponseEntity deleteProject(@PathVariable Integer id) throws InvalidIdException {
+    public ResponseEntity<String> deleteProject(@PathVariable Integer id) throws InvalidIdException {
         projectService.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>("OK",HttpStatus.OK);
     }
 }

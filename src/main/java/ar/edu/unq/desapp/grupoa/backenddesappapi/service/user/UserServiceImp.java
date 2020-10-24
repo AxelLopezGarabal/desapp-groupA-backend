@@ -60,7 +60,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void save(UserBodyPost user) throws MailValidation, InvalidOrNullFieldException {
+    public int save(UserBodyPost user) throws MailValidation, InvalidOrNullFieldException {
         this.validateName(user.getName());
         this.validateNickName(user.getNickname());
         this.validatePassword(user.getPassword());
@@ -68,7 +68,7 @@ public class UserServiceImp implements UserService {
         Wallet newWallet = walletDAO.save(new Wallet(0.0, system));
         User newUser = ((new User()).setUser(user));
         newUser.setWallet(newWallet);
-        userDAO.save(newUser);
+        return userDAO.save(newUser).getId().intValue();
     }
 
     @Override
@@ -89,7 +89,7 @@ public class UserServiceImp implements UserService {
     }
 
     private void validateAmount(Double amount) throws InvalidOrNullFieldException {
-        if (amount == null || (Double.compare(amount, 0.0) < 0)){
+        if (amount == null || (amount).intValue() <= 0){
             throw new InvalidOrNullFieldException("amount");
         }
     }

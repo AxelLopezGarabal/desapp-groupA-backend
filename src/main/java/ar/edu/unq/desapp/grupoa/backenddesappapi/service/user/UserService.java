@@ -20,7 +20,7 @@ public interface UserService {
 
     void delete(Integer id) throws InvalidIdException;
 
-    void save(UserBodyPost user) throws MailValidation, InvalidOrNullFieldException;
+    int save(UserBodyPost user) throws MailValidation, InvalidOrNullFieldException;
 
     void donate(Integer id, DonationRequestBody body) throws InvalidIdException, InvalidOrNullFieldException;
 }

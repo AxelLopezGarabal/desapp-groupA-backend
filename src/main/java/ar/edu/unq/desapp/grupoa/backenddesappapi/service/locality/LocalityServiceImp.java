@@ -34,10 +34,10 @@ public class LocalityServiceImp implements LocalityService {
     }
 
     @Override
-    public void save(LocalityBodyPost body) throws InvalidOrNullFieldException {
+    public int save(LocalityBodyPost body) throws InvalidOrNullFieldException {
         Locality newLocality = new Locality();
         this.validateBody(body);
-        localityDAO.save(newLocality.setBody(body));
+        return localityDAO.save(newLocality.setBody(body)).getId().intValue();
     }
 
     private void validateBody(LocalityBodyPost body) throws InvalidOrNullFieldException {
@@ -65,7 +65,9 @@ public class LocalityServiceImp implements LocalityService {
     }
 
     @Override
-    public void delete(Integer id) {
-        localityDAO.deleteById(Long.valueOf(id));
+    public void delete(Integer id) throws InvalidIdException {
+        Long value = Long.valueOf(id);
+        validateId(value);
+        localityDAO.deleteById(value);
     }
 }
